@@ -34,7 +34,7 @@ const VerifyEmail = () => {
                 <h2 className='text-xl font-semihold text-gray-800'>{status}</h2>
             </div>
         </div>
-      verifyemail
+      verify email
     </div>
   )
 }

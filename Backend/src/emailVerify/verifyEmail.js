@@ -18,10 +18,13 @@ const mailConfiguration ={
     to:email,
     subject:'Email verification',
 
-    text: `Hi !There,You have a recently visited
-           our website ans entered your email.
+    text: 
+    `Hi !There,You have a recently visited
+     our website ans entered your email.
      Please follow the given link to verify your email 
+
      http://localhost:5173/verify/${token} 
+     
      Thanks`
 
 
