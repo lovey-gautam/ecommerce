@@ -20,7 +20,7 @@ const ProductCard = ({product,loading}) => {
     if (loadingBtn) return; // Prevent multiple clicks
     setLoadingBtn(true);
 
-    try{ const res = await axios.post(`http://localhost:3000/api/v1/cart/add`,
+    try{ const res = await axios.post(`${import.meta.env.VITE_URL}/cart/add`,
       {productId},{ 
         headers:{ Authorization:`Bearer ${accessToken}`, 
         'Content-Type': 'application/json', // ✅ ensures Express parses req.body
