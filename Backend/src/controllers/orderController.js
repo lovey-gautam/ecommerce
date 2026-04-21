@@ -15,6 +15,8 @@ export const createOrder = async(req,res)=>{
             currency:currency || "INR",
             receipt:`receipt_${Date.now()}`
         }
+        //const razorpayInstance = getRazorpayInstance();
+
         const razorpayOrder = await razorpayInstance.orders.create(options)
 
         const newOrder = new Order({

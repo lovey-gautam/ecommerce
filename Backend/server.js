@@ -25,4 +25,5 @@ app.use('/api/v1/orders',orderRoute)
 app.listen(PORT,()=>{
     connectDb()
     console.log(`server is start at port :${PORT}`)
+   // console.log("USING URI:", process.env.MONGO_URI);
 })
