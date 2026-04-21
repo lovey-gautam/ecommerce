@@ -77,7 +77,7 @@ setUpdateUser({...updateUser,profilePic:URL.createObjectURL(selectedFile)})
         formData.append("file",file)
       }
     
-      const res = await axios.put(`${onst res = await axios.get(`${import.meta.env.VITE_URL}/user/update/${userId}`,formData,{
+      const res = await axios.put(`${import.meta.env.VITE_URL}/user/update/${userId}`,formData,{
         headers:{
           Authorization:`Bearer ${accessToken}`,
           "Content-Type":"multipart/form-data"
