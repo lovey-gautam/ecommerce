@@ -16,7 +16,7 @@ const [quantity, setQuantity] = useState(1);
   const addToCart = async(productId)=>{
     console.log("clicked")
     try{
-    const res = await axios.post(`http://localhost:3000/api/v1/cart/add`,{productId,quantity},{
+    const res = await axios.post(`${import.meta.env.VITE_URL}/cart/add`,{productId,quantity},{
       headers:{
         Authorization:`Bearer ${accessToken}`
       }
