@@ -55,7 +55,7 @@ const AdminProduct = () => {
   
    const getAllProducts = async () => {
     try {
-      const res = await axios.get("http://localhost:3000/api/v1/products/getallproducts");
+      const res = await axios.get("${import.meta.env.VITE_URL}/products/getallproducts");
       if (res.data.success) {
         dispatch(setProducts(res.data.products));
       }
