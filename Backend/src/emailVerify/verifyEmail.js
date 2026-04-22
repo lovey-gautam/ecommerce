@@ -23,7 +23,7 @@ const mailConfiguration ={
       our website and entered your email.
       Please click the given link to verify your email 
 
-     https://ecommerce-brijkart.netlify.app/verify/${token}
+     https://ecommerce-l6md.vercel.app/verify/${token}
      
      Thanks`
 
