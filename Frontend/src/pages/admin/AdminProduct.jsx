@@ -55,7 +55,7 @@ const AdminProduct = () => {
   
    const getAllProducts = async () => {
     try {
-      const res = await axios.get("${import.meta.env.VITE_URL}/products/getallproducts");
+      const res = await axios.get(`${import.meta.env.VITE_URL}/products/getallproducts`);
       if (res.data.success) {
         dispatch(setProducts(res.data.products));
       }
@@ -74,7 +74,7 @@ const AdminProduct = () => {
   let filterdProducts = products.filter((product)=>
   product.productName.toLowerCase().includes(searchTerm.toLowerCase())||
 product.brand.toLowerCase().includes(searchTerm.toLowerCase())||
-product.category.toLowerCase().includes(searchTerm.toLowerCase))
+product.category.toLowerCase().includes(searchTerm.toLowerCase())
 
 if(sortOrder === "lowToHigh"){
   filterdProducts =[...filterdProducts].sort((a,b)=>a.productPrice-b.productPrice)
