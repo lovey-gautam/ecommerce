@@ -6,7 +6,10 @@ const app = express();
 app.use(express.json());
 
 app.use(cors({
-  origin:  ["http://localhost:5173", "http://localhost:5174","https://ecommerce-l6md.vercel.app"],
+  origin:  ["http://localhost:5173", "http://localhost:5174",
+
+                "https://ecommerce-l6md-git-main-lovey-gautams-projects.vercel.app"
+           ],
   credentials: true,
 }));
 app.use(express.urlencoded({ extended: true }));
