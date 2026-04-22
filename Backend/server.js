@@ -11,13 +11,23 @@ import cartRoute from './src/routes/cartRoute.js'
 import orderRoute from './src/routes/orderRoute.js'
 
 app.use(cors({
-  origin:  [
-      "http://localhost:5173",
-      "http://localhost:5174",
-    "https://ecommerce-l6md-git-main-lovey-gautams-projects.vercel.app"
-    ],
+  origin: function (origin, callback) {
 
-    
+    // allow requests with no origin (Postman, mobile apps)
+    if (!origin) return callback(null, true);
+
+    // allow localhost
+    if (origin.startsWith("http://localhost")) {
+      return callback(null, true);
+    }
+
+    // allow ALL vercel deployments
+    if (origin.includes(".vercel.app")) {
+      return callback(null, true);
+    }
+
+    return callback(new Error("Not allowed by CORS"));
+  },
   credentials: true
 }));
 
