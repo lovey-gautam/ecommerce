@@ -57,7 +57,7 @@ export const verify = async(req,res)=>{
                 message:'Authorization token is missing or invalid'
             })
         }
-        const token = authHeader.split(" ")[1] // after split it become array
+        // after split it become array
         let decoded 
         try{
             decoded = jwt.verify(token,process.env.JWT_SECRET)
