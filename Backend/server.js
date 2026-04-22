@@ -11,22 +11,13 @@ import cartRoute from './src/routes/cartRoute.js'
 import orderRoute from './src/routes/orderRoute.js'
 
 app.use(cors({
-  origin: function (origin, callback) {
-    const allowedOrigins = [
+  origin:  [
       "http://localhost:5173",
       "http://localhost:5174",
       "https://ecommerce-l6md.vercel.app"
-    ];
+    ],
 
-    // allow requests with no origin (like mobile apps or Postman)
-    if (!origin) return callback(null, true);
-
-    if (allowedOrigins.includes(origin)) {
-      return callback(null, true);
-    }
-
-    return callback(new Error("Not allowed by CORS"));
-  },
+    
   credentials: true
 }));
 
