@@ -23,7 +23,7 @@ const mailConfiguration ={
      our website ans entered your email.
      Please follow the given link to verify your email 
 
-     http://localhost:5173/verify/${token} 
+     https://ecommerce-brijkart.netlify.app/verify/${token}
      
      Thanks`
 
