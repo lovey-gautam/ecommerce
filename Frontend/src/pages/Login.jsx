@@ -58,10 +58,15 @@ toast.success(res.data.message)
 }
       }
       catch(error){
-             console.log(error);
+  console.log(error);
 
-       toast.error(error.response.data.message)
-      }
+  const message =
+    error?.response?.data?.message || 
+    error?.message || 
+    "Something went wrong";
+
+  toast.error(message);
+}
       finally{
         setLoading(false)
       }
