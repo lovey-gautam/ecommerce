@@ -14,7 +14,7 @@ app.use(cors({
   origin:  [
       "http://localhost:5173",
       "http://localhost:5174",
-      "https://ecommerce-l6md.vercel.app"
+    "https://ecommerce-l6md-git-main-lovey-gautams-projects.vercel.app"
     ],
 
     
