@@ -50,8 +50,8 @@ catch(error){
 
 export const verify = async(req,res)=>{
     try{
-        const authHeader = req.headers.authorization
-        if(!authHeader || !authHeader.startsWith("Bearer")){
+        const {token} = req.params;
+        if(!token){
            return res.status(400).json({
                 success:false,
                 message:'Authorization token is missing or invalid'
