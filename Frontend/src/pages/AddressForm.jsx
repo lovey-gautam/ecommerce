@@ -48,7 +48,7 @@ console.log(cart)
 const handlePayment = async()=>{
     const accessToken = localStorage.getItem("accessToken")
     try{
-        const {data} = await axios.post(`${import.meta.env.VITE_URL}/api/v1/orders/create-order`,{
+        const {data} = await axios.post(`${import.meta.env.VITE_URL}/orders/create-order`,{
             products:cart?.items?.map(item=>({
                 productId:item.productId._id,
                 quantity:item.quantity
@@ -73,7 +73,8 @@ const handlePayment = async()=>{
                 description:"Order Payment",
                 handler:async function (response){
                     try{
-                        const verifyRes = await axios.post(`${import.meta.env.VITE_URL}/api/v1/orders/verify-payment`,
+                        const verifyRes = await axios.post(`${import.meta.env.VITE_URL}
+                        /orders/verify-payment`,
                         response,{
                             headers:{Authorization:`Bearer ${accessToken}`}
                         })
@@ -95,7 +96,7 @@ const handlePayment = async()=>{
                 modal:{
                     ondismiss:async function () {
                         //handle user closing the popup
-                        await axios.post(`${import.meta.env.VITE_URL}/api/v1/orders/verify-payment`,{
+                        await axios.post(`${import.meta.env.VITE_URL}/orders/verify-payment`,{
                             razorpay_order_id:data.order.id,
                             paymentFailed:true
                         },{
@@ -116,7 +117,7 @@ const handlePayment = async()=>{
             //listen for payment failures 
 
             rzp.on("payment.failed",async function (response){
-                await axios.post(`${import.meta.env.VITE_URL}/api/v1/orders/verify-payment`,{
+                await axios.post(`${import.meta.env.VITE_URL}/orders/verify-payment`,{
                     razorpay_order_id:data.order.id,
                     paymentFailed:true
                 },{

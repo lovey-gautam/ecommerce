@@ -19,11 +19,11 @@ const mailConfiguration ={
     subject:'Email verification',
 
     text: 
-    `Hi !There,You have a recently visited
-     our website ans entered your email.
-     Please follow the given link to verify your email 
+    ` Hi !There,You have a recently visited
+      our website and entered your email.
+      Please click the given link to verify your email 
 
-     http://localhost:5173/verify/${token} 
+     https://ecommerce-brijkart.netlify.app/verify/${token}
      
      Thanks`
 

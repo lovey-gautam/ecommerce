@@ -11,7 +11,7 @@ const AdminOrders = () => {
   useEffect(()=>{
     const fetchOrders = async()=>{
       try{
-        const {data} = await axios.get("http://localhost:3000/api/v1/orders/all",{
+        const {data} = await axios.get("${import.meta.env.VITE_URL}/orders/all",{
         headers:{Authorization:`Bearer ${accessToken}`},
         })
         if(data.success) setOrders(data.orders);

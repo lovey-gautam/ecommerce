@@ -50,14 +50,14 @@ catch(error){
 
 export const verify = async(req,res)=>{
     try{
-        const authHeader = req.headers.authorization
-        if(!authHeader || !authHeader.startsWith("Bearer")){
+        const {token} = req.params;
+        if(!token){
            return res.status(400).json({
                 success:false,
                 message:'Authorization token is missing or invalid'
             })
         }
-        const token = authHeader.split(" ")[1] // after split it become array
+        // after split it become array
         let decoded 
         try{
             decoded = jwt.verify(token,process.env.JWT_SECRET)

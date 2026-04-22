@@ -52,7 +52,7 @@ setUpdateUser({...updateUser,profilePic:URL.createObjectURL(selectedFile)})
         formData.append("file",file)
       }
     
-      const res = await axios.put(`http://localhost:3000/api/v1/user/update/${userId}`,formData,{
+      const res = await axios.put(`${import.meta.env.VITE_URL}/user/update/${userId}`,formData,{
         headers:{
           Authorization:`Bearer ${accessToken}`,
           "Content-Type":"multipart/form-data"
@@ -74,7 +74,7 @@ setUpdateUser({...updateUser,profilePic:URL.createObjectURL(selectedFile)})
 
    const getUserDetails = async()=>{
    try{
-   const res = await axios.get(`http://localhost:3000/api/v1/user/get-user/${userId}`)
+   const res = await axios.get(`${import.meta.env.VITE_URL}/user/get-user/${userId}`)
    if(res.data.success){
     setUpdateUser(res.data.user)
    }

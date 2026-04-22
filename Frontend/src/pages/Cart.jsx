@@ -32,7 +32,7 @@ const shipping = subtotal === 0 ? 0 : (subtotal > 299 ? 0 : 10);
 const tax = Math.round(subtotal * 0.05);
   const total = subtotal +shipping+tax
 
-const API = `http://localhost:3000/api/v1/cart`
+const API = `${import.meta.env.VITE_URL}/cart`
 const accessToken = localStorage.getItem("accessToken")
 const loadCart = async()=>{
   try{

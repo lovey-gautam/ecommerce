@@ -11,7 +11,7 @@ const ShowUserOrder = () => {
   const [userOrder,setUserOrder] = useState([])
   const getUserOrders = async()=>{
     const accessToken = localStorage.getItem("accessToken")
-    const res  = await axios.get(`${import.meta.env.VITE_URL}/api/v1/orders/user-order/${params.userId}`,{
+    const res  = await axios.get(`${import.meta.env.VITE_URL}/orders/user-order/${params.userId}`,{
       headers:{
         Authorization:`Bearer ${accessToken}`
       }

@@ -55,7 +55,7 @@ const AdminProduct = () => {
   
    const getAllProducts = async () => {
     try {
-      const res = await axios.get("http://localhost:3000/api/v1/products/getallproducts");
+      const res = await axios.get(`${import.meta.env.VITE_URL}/products/getallproducts`);
       if (res.data.success) {
         dispatch(setProducts(res.data.products));
       }
@@ -74,7 +74,7 @@ const AdminProduct = () => {
   let filterdProducts = products.filter((product)=>
   product.productName.toLowerCase().includes(searchTerm.toLowerCase())||
 product.brand.toLowerCase().includes(searchTerm.toLowerCase())||
-product.category.toLowerCase().includes(searchTerm.toLowerCase))
+product.category.toLowerCase().includes(searchTerm.toLowerCase()))
 
 if(sortOrder === "lowToHigh"){
   filterdProducts =[...filterdProducts].sort((a,b)=>a.productPrice-b.productPrice)
@@ -113,7 +113,7 @@ editProduct.productImg
 })
 
 try{
-  const res = await axios.put(`http://localhost:3000/api/v1/products/update/${editProduct._id}`,formData,{
+  const res = await axios.put(`${import.meta.env.VITE_URL}/products/update/${editProduct._id}`,formData,{
     headers:{
       Authorization:`Bearer ${accessToken}`
     }
@@ -132,7 +132,7 @@ setOpen(false)
   const deleteProductHandler = async(productId)=>{
     try{
       const remainingProducts = products.filter((product)=>product._id !== productId)
-  const res = await axios.delete(`http://localhost:3000/api/v1/products/delete/${productId}`,{
+  const res = await axios.delete(`${import.meta.env.VITE_URL}/products/delete/${productId}`,{
     headers:{
       Authorization:`Bearer ${accessToken}`
     }
