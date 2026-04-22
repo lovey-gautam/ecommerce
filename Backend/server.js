@@ -10,7 +10,7 @@ import productRoute from './src/routes/productRoute.js';
 import cartRoute from './src/routes/cartRoute.js'
 import orderRoute from './src/routes/orderRoute.js'
 app.use(cors({
-    origin:['http://localhost:5173',"http://localhost:5174", "https://ecommerce-brijkart.netlify.app"
+    origin:['http://localhost:5173',"http://localhost:5174", "https://ecommerce-l6md.vercel.app"
 ],
     credentials:true
 }))
