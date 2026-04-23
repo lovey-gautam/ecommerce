@@ -1,6 +1,8 @@
 import Hero from '@/components/Hero'
 import React from 'react'
 import Features from '@/components/Features'
+import  { useState, useEffect } from 'react'
+
 const Home = () => {
    const [loading, setLoading] = useState(true)
 
