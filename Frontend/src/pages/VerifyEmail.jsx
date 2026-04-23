@@ -8,7 +8,7 @@ const VerifyEmail = () => {
     const navigate = useNavigate()
     const verifyEmail= async()=>{
         try{
-            const res = await axios.get(`${import.meta.env.VITE_URL}/user/verify-email/${token}`);
+            const res = await axios.get(`${import.meta.env.VITE_URL}/user/verify/${token}`);
                
             if(res.data.success){
                 setStatus('✅Email Verified Successfully')
