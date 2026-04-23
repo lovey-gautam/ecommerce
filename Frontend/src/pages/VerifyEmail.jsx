@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react'
 import { Navigate, useNavigate, useParams } from 'react-router-dom'
 import axios from 'axios'
 
-const verifyEmail = () => {
+const VerifyEmail = () => {
     const {token} = useParams()
     const [status,setStatus] = useState("verifying...")
     const navigate = useNavigate()
-    const VerifyEmail= async()=>{
+    const verifyEmail= async()=>{
         try{
             const res = await axios.get(`${import.meta.env.VITE_URL}/user/verify-email/${token}`);
                
