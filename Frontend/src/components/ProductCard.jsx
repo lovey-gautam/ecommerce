@@ -44,7 +44,7 @@ const ProductCard = ({product,loading}) => {
     }
    console.log("Product images:", productImg);
   return (
-    <div className='shadow-lg rounded-lg overflow-hidden h-max'>
+    <div className='shadow-lg rounded-lg overflow-hidden flex flex-col'>
       <div className='w-full h-full aspect-square overflow-hidden'>
         {
           loading?<Skeleton className="w-full h-full rounded-lg"/>:
