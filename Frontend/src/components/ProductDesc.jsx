@@ -37,18 +37,18 @@ const [quantity, setQuantity] = useState(1);
 
   return (
     <div className='flex flex-col gap-4'>
-      <h1 className='font-bold text-4xl text-gray-800'>{product.productName}</h1>
+      <h1 className='font-bold text-2xl sm:text-3xl md:text-4xl text-gray-800'>{product.productName}</h1>
       <p className='text-gray-800'>{product.category} | {product.brand}</p>
-      <h2 className='text-pink-500 font-bold text-2xl'>₹{product.productPrice}</h2>
+      <h2 className='text-pink-500 font-bold text-xl sm:text-2xl'>₹{product.productPrice}</h2>
       <p className='line-clamp-12 text-muted-foreground'>{product.productDesc}</p>
-      <div className='flex gap-2 items-center w-[300px]'>
+      <div className='flex gap-2 items-center w-full max-w-xs'>
         <p className='text-gray-800 font-semibold'>Quantity :</p>
-        <Input type='number' className='w-14' value={quantity} 
+        <Input type='number' className= 'w-16 sm:w-20' value={quantity} 
           onChange={(e) => setQuantity(Number(e.target.value))} 
 />
       </div>
       <Button onClick={()=>addToCart(product._id)}
-       className='bg-pink-600 w-max'>Add to Cart</Button>
+       className='bg-pink-600 w-full sm:w-max'>Add to Cart</Button>
     </div>
   )
 }
