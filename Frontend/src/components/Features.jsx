@@ -14,12 +14,12 @@ const Features = () => {
                 <p className='text-muted-foreground'>On orders over $50</p>
                 </div> 
                 </div>
-                <div className='flex items-center space-x-4'>
+                <div className='flex flex-col sm:flex-row items-center sm:items-start gap-4 text-center sm:text-left'>
                     <div className='h-12 w-12 bg-green-100 rounded-full flex items-center justify-center'>
                         <Shield className='h-6 w-6 text-green-600'/>
                     </div>
                     <div>
-            <h3 className='font-semihold'>Secure Payment </h3>
+            <h3 className='font-semibold'>Secure Payment </h3>
             <p className='text-muted-foreground'>100% secure transcation </p>
                     </div>
                 </div>
