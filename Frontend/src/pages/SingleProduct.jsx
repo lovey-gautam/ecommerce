@@ -6,10 +6,10 @@ import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 
 const SingleProduct = () => {
-  const {id } = useParams();
+  const {id: productId } = useParams();
     const params = useParams()
-    const productId = params.id;
-    const {products} = useSelector(store=>store.product)
+    //const productId = params.id;
+    const {products =[]} = useSelector(store=>store.product)
     const product = products.find((item)=>item._id=== productId)
     if (!products || products.length === 0) {
   return <p>Loading products...</p>;
