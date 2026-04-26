@@ -9,12 +9,18 @@ import  { useState } from 'react';
 import { setCart } from '@/redux/productSlice'
 // or whichever toast library you use
 const ProductDesc = ({product}) => {
+  
+  const [loadingBtn, setLoadingBtn] = useState(false)
   const accessToken = localStorage.getItem("accessToken")
   const dispatch = useDispatch()
 
 const [quantity, setQuantity] = useState(1);
+  
   const addToCart = async(productId)=>{
     console.log("clicked")
+     if (loadingBtn) return
+    setLoadingBtn(true)
+
     try{
     const res = await axios.post(`${import.meta.env.VITE_URL}/cart/add`,{productId,quantity},{
       headers:{
@@ -31,6 +37,9 @@ const [quantity, setQuantity] = useState(1);
    toast.error(error?.response?.data?.message || "Failed to add to cart")
 
     }
+    finally {
+    setLoadingBtn(false) // ✅ IMPORTANT
+  }
     console.log("HIT API");
   }
  
@@ -40,15 +49,25 @@ const [quantity, setQuantity] = useState(1);
       <h1 className='font-bold text-2xl sm:text-3xl md:text-4xl text-gray-800'>{product.productName}</h1>
       <p className='text-gray-800'>{product.category} | {product.brand}</p>
       <h2 className='text-pink-500 font-bold text-xl sm:text-2xl'>₹{product.productPrice}</h2>
-      <p className='line-clamp-12 text-muted-foreground'>{product.productDesc}</p>
+      <p className='line-clamp-12 text-muted-foreground text-sm sm:text-base leading-relaxed'>{product.productDesc}</p>
       <div className='flex gap-2 items-center w-full max-w-xs'>
         <p className='text-gray-800 font-semibold'>Quantity :</p>
-        <Input type='number' className= 'w-16 sm:w-20' value={quantity} 
-          onChange={(e) => setQuantity(Number(e.target.value))} 
+        <Input   
+          type='number'  
+          min="1"
+         className= 'w-16 sm:w-20' value={quantity} 
+         onChange={(e) => {
+    const value = Math.max(1, Number(e.target.value))
+    setQuantity(value)
+  }}
+         
 />
       </div>
-      <Button onClick={()=>addToCart(product._id)}
-       className='bg-pink-600 w-full sm:w-max'>Add to Cart</Button>
+      <Button 
+          disabled={loadingBtn}
+        onClick={()=>addToCart(product._id)}
+       className='bg-pink-600 w-full sm:w-max'>  {loadingBtn ? "Adding..." : "Add to Cart"}
+</Button>
     </div>
   )
 }
