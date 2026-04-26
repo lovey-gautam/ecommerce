@@ -47,8 +47,11 @@ const [quantity, setQuantity] = useState(1);
 
   return (
     <div className='flex flex-col gap-5 w-full max-w-xl'>
+       <div className="space-y-1">
       <h1 className='font-bold text-xl sm:text-2xl md:text-3xl  break-words text-gray-800'>{product.productName}</h1>
       <p className='text-gray-500 text-sm'>{product.category} | {product.brand}</p>
+       </div>
+       
       <h2 className='text-pink-600 font-bold text-2xl sm:text-3xl'>₹{product.productPrice?.toLocaleString('en-IN')}</h2>
       <div className="space-y-2">
        <p className={`text-gray-600 text-sm sm:text-base leading-relaxed tracking-wide
@@ -63,6 +66,7 @@ const [quantity, setQuantity] = useState(1);
   {showFull ? "Show Less" : "Read More"}</button>
       )}
         </div>
+       <div className="space-y-1">
       <div className='flex gap-3 items-center'>
         <span className='font-semibold'>Quantity:</span>
         <Input   
@@ -81,6 +85,7 @@ const [quantity, setQuantity] = useState(1);
   }}
          
 />
+      </div>
       </div>
       <Button 
           disabled={loadingBtn}
