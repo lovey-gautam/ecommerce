@@ -46,32 +46,38 @@ const [quantity, setQuantity] = useState(1);
  
 
   return (
-    <div className='flex flex-col gap-4'>
-      <h1 className='font-bold text-2xl sm:text-3xl md:text-4xl text-gray-800'>{product.productName}</h1>
-      <p className='text-gray-800'>{product.category} | {product.brand}</p>
-      <h2 className='text-pink-500 font-bold text-xl sm:text-2xl'>₹{product.productPrice}</h2>
-      <div className="max-w-xl space-y-2">
-       <p className={`text-muted-foreground text-sm sm:text-base leading-relaxed 
-       ${showFull ? '' : 'line-clamp-3 sm:line-clamp-4'}`}>
+    <div className='flex flex-col gap-5 w-full max-w-xl'>
+      <h1 className='font-bold text-xl sm:text-2xl md:text-3xl  break-words text-gray-800'>{product.productName}</h1>
+      <p className='text-gray-500 text-sm'>{product.category} | {product.brand}</p>
+      <h2 className='text-pink-600 font-bold text-2xl sm:text-3xl'>₹{product.productPrice?.toLocaleString('en-IN')}</h2>
+      <div className="space-y-2">
+       <p className={`text-gray-600 text-sm sm:text-base leading-relaxed tracking-wide
+       ${showFull ? '' : 'line-clamp-3 '}`}>
        {product.productDesc}
         </p>
       {isLong && (
       <button 
   onClick={() => setShowFull(!showFull)}
-  className="text-pink-600 text-sm font-semibold w-fit"
+  className="text-pink-600 text-sm font-semibold"
 >
   {showFull ? "Show Less" : "Read More"}</button>
       )}
         </div>
-      <div className='flex gap-2 items-center w-full max-w-xl'>
-        <p className='text-gray-800 font-semibold'>Quantity :</p>
+      <div className='flex gap-3 items-center'>
+        <span className='font-semibold'>Quantity:</span>
         <Input   
           type='number'  
           min="1"
-         className= 'w-16 sm:w-20' value={quantity} 
+         className= 'w-20' 
+          value={quantity} 
          onChange={(e) => {
-    const value = Math.max(1, Number(e.target.value))
-    setQuantity(value)
+    const value = e.target.value
+  if (value === '') {
+    setQuantity(1)
+  } else {
+    const num = Math.max(1, Number(value))
+    setQuantity(num)
+  }
   }}
          
 />
@@ -79,7 +85,7 @@ const [quantity, setQuantity] = useState(1);
       <Button 
           disabled={loadingBtn}
         onClick={()=>addToCart(product._id)}
-       className='bg-pink-600 w-full sm:w-max'>  {loadingBtn ? "Adding..." : "Add to Cart"}
+       className='bg-pink-600 hover:bg-pink-700 w-full md:w-max'>  {loadingBtn ? "Adding..." : "Add to Cart"}
 </Button>
     </div>
   )
