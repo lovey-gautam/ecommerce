@@ -18,13 +18,15 @@ const ProductImg = ({images=[]}) => {
   return (
     
     <div className='flex flex-col md:flex-row gap-4 w-full'>
-      <div className='flex md:flex-col gap-3 overflow-x-auto md:overflow-visible'>{
+      <div className='flex md:flex-col gap-2 overflow-x-auto md:overflow-visible scrollbar-hide'>{
         
         images.map((img,idx)=>{
          return <img onClick={()=>setMainImg(img.url)}
            key={idx}
            src={img.url} alt="" 
-           className='cursor-pointer w-16 h-16 object-cover border shadow-md flex-shrink-0'/>
+           className={`cursor-pointer w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16  object-cover border shadow-md flex-shrink-0
+            transition 
+              ${mainImg === img.url ? 'border-pink-600 ring-2 ring-pink-300' : ''}`/>
         })
         }
       </div>
