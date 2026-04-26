@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 
 const SingleProduct = () => {
-  const {id:productId} = useParams();
+  const {id } = useParams();
     const params = useParams()
     const productId = params.id;
     const {products} = useSelector(store=>store.product)
