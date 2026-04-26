@@ -18,23 +18,25 @@ const ProductImg = ({images=[]}) => {
   return (
     
     <div className='flex flex-col md:flex-row gap-4 w-full'>
-      <div className='flex md:flex-col gap-2 overflow-x-auto md:overflow-visible scrollbar-hide'>{
+      <div className='flex md:flex-col flex-row gap-2 
+                      overflow-x-auto md:overflow-y-auto 
+                      max-h-[400px]'>{
         
         images.map((img,idx)=>{
          return <img onClick={()=>setMainImg(img.url)}
            key={idx}
-           src={img.url} alt="" 
-           className={`cursor-pointer w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16  object-cover border shadow-md flex-shrink-0
-            transition 
-              ${mainImg === img.url ? 'border-pink-600 ring-2 ring-pink-300' : ''}`/>
-        })
+           src={img.url} alt=""
+          
+           className={`cursor-pointer w-14 h-14 sm:w-14 sm:h-14 md:w-16 md:h-16  object-cover border 
+              ${mainImg === img.url ? 'border-pink-600 ' : ''}`}/>
+        ))
         }
       </div>
-      <div className = "w-full flex justify-center">
+      <div className = "flex-1 flex justify-center">
       <Zoom>
       
        <img src={mainImg} alt="" 
-        className='w-full max-w-md md:max-w-lg object-contain border shadow-lg'
+        className='w-full max-w-md object-contain border'
 />
 
       </Zoom>
