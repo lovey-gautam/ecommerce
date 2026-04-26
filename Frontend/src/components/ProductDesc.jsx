@@ -14,7 +14,7 @@ const ProductDesc = ({product}) => {
   const [loadingBtn, setLoadingBtn] = useState(false)
   const accessToken = localStorage.getItem("accessToken")
   const dispatch = useDispatch()
-
+const isLong = product.productDesc?.length > 120;
 const [quantity, setQuantity] = useState(1);
   
   const addToCart = async(productId)=>{
