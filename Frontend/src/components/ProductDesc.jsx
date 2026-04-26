@@ -10,6 +10,7 @@ import { setCart } from '@/redux/productSlice'
 // or whichever toast library you use
 const ProductDesc = ({product}) => {
   
+  const [showFull, setShowFull] = useState(false);
   const [loadingBtn, setLoadingBtn] = useState(false)
   const accessToken = localStorage.getItem("accessToken")
   const dispatch = useDispatch()
@@ -49,8 +50,20 @@ const [quantity, setQuantity] = useState(1);
       <h1 className='font-bold text-2xl sm:text-3xl md:text-4xl text-gray-800'>{product.productName}</h1>
       <p className='text-gray-800'>{product.category} | {product.brand}</p>
       <h2 className='text-pink-500 font-bold text-xl sm:text-2xl'>₹{product.productPrice}</h2>
-      <p className='line-clamp-12 text-muted-foreground text-sm sm:text-base leading-relaxed'>{product.productDesc}</p>
-      <div className='flex gap-2 items-center w-full max-w-xs'>
+      <div className="max-w-xl space-y-2">
+       <p className={`text-muted-foreground text-sm sm:text-base leading-relaxed 
+       ${showFull ? '' : 'line-clamp-3 sm:line-clamp-4'}`}>
+       {product.productDesc}
+        </p>
+      {isLong && (
+      <button 
+  onClick={() => setShowFull(!showFull)}
+  className="text-pink-600 text-sm font-semibold w-fit"
+>
+  {showFull ? "Show Less" : "Read More"}</button>
+      )}
+        </div>
+      <div className='flex gap-2 items-center w-full max-w-xl'>
         <p className='text-gray-800 font-semibold'>Quantity :</p>
         <Input   
           type='number'  
