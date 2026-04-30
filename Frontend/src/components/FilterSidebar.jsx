@@ -3,7 +3,19 @@ import { Button } from './ui/button'
 import { Input } from './ui/input'
 import { Label } from 'radix-ui'
 import e from 'cors'
-const FilterSidebar = ({search,setSearch,category,setCategory,brand,setBrand,setPriceRange,priceRange,allProducts}) => {
+const FilterSidebar = ({
+ search,
+ setSearch,
+ category,
+ setCategory,
+ brand,
+ setBrand,
+ setPriceRange,
+ priceRange,
+ allProducts,
+   setShowFilters   
+
+}) => {
  // const priceRange = [0,5000]
   const Categories = allProducts.map(p=>p.category)//
 
@@ -23,16 +35,24 @@ const FilterSidebar = ({search,setSearch,category,setCategory,brand,setBrand,set
 
 const handleBrandChange=(e)=>{
   setBrand(e.target.value)
+   if (setShowFilters) setShowFilters(false)
+
 } 
 
 const handleMinChange=(e)=>{
   const value = Number(e.target.value);
-  if(value <= priceRange[1]) setPriceRange([value ,priceRange[1]])
+  if{(value <= priceRange[1]) setPriceRange([value ,priceRange[1]])
+         if (setShowFilters) setShowFilters(false)
+
+    }
 }
 
 const handleMaxChange = (e) =>{
   const value = Number(e.target.value);
-  if(value >= priceRange[0]) setPriceRange([priceRange[0],value])
+  if{
+   (value >= priceRange[0]) setPriceRange([priceRange[0],value])
+       if (setShowFilters) setShowFilters(false)
+  }
 }
 
 const resetFilters=()=>{
@@ -40,9 +60,11 @@ const resetFilters=()=>{
   setCategory("All")
   setBrand("All");
   setPriceRange([0,999999]) 
+   if (setShowFilters) setShowFilters(false)
+
 }
   return ( 
-    <div className='bg-gray-100 mt-6 p-4 rounded-md hidden md:block w-64'>
+    <div className='bg-gray-100 mt-6 p-4 rounded-md  w-64'>
       
       <Input 
        type = "text"
