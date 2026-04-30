@@ -109,15 +109,15 @@ const resetFilters=()=>{
           Price Rnage: ₹{priceRange[0]} - ₹{priceRange[1]}
         </label>
                     <div className='flex items-center gap-2'>
-                      <input type="number" min="0" max="5000" value={priceRange[0]} onChange={handleMinChange} className='w-20 p-1 border border-gray-300 rounded'/>
+                      <input type="number" min="0" max="5000" value={priceRange[0]} onChange={handleMinChange} className='w-20 p-1 border  rounded'/>
                       <span></span>
-                      <input type ="number" min="0" max="999999" value={priceRange[1]} onChange={handleMaxChange} className='w-20 p-1 border border-gray-300 rounded'/>
+                      <input type ="number" min="0" max="999999" value={priceRange[1]} onChange={handleMaxChange} className='w-20 p-1 border  rounded'/>
                   
                     </div>
                     <input type="range" min="0" max="5000" step="100" className='w-full' value={priceRange[0]} onChange={handleMinChange}/>
                      <input type="range" min="0" max="999999" step="100" className='w-full'  value={priceRange[1]} onChange={handleMaxChange}/>
       </div>
-      <Button onClick = {resetFilters}className="bg-pink-600 text-white mt-5 cursor-pointer w-full">Reset Filters</Button>
+      <Button onClick = {resetFilters} className="bg-pink-600 text-white mt-5 cursor-pointer w-full">Reset Filters</Button>
     </div>
   )
 }
