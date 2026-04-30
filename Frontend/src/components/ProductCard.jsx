@@ -44,23 +44,24 @@ const ProductCard = ({product,loading}) => {
     }
    console.log("Product images:", productImg);
   return (
-    <div className='shadow-lg rounded-lg overflow-hidden flex flex-col'>
+    <div className='shadow rounded-lg overflow-hidden flex flex-col text-sm'>
       <div className='w-full aspect-square overflow-hidden'>
         {
-          loading?<Skeleton className="w-full h-full rounded-lg"/>:
+          loading? (<Skeleton className="w-full h-full rounded-lg"/>
+                    ):(
           <img onClick={()=>navigate(`/products/${product._id}`)}
           src={productImg[0]?.url || '/placeholder.png' } alt="" 
             onError={(e) => { e.currentTarget.src = '/placeholder.png'; }}
 
-          className='w-full h-full object-cover transition-transform duration-300 hover:scale-105'/>
-
+          className='w-full h-full object-cover '/>
+)
         }
        </div>
        
-      <div className='px-3 py-2 space-y-1'>
-        <h1 className='font-semibold h-12 line-clamp-2 text-sm sm:text-base'>{productName}</h1>
-        <h2 className='font-bold'>₹{productPrice.toLocaleString('en-IN')}</h2> 
-        <Button disabled ={loadingBtn} onClick ={()=>addToCart(product._id)} className="bg-pink-600 hover:bg-blue-950 mb-3 w-full">
+      <div className='px-2 py-2 space-y-1'>
+        <h1 className='line-clamp-2 text-xs sm:text-sm font-medium'>{productName}</h1>
+        <h2 className='font-semibold text-sm'>₹{productPrice.toLocaleString('en-IN')}</h2> 
+        <Button size="sm" disabled ={loadingBtn} onClick ={()=>addToCart(product._id)} className="bg-pink-600 hover:bg-blue-950 text-xs py-1 w-full">
           <ShoppingCart/>{loadingBtn? "Adding...":"Add to Cart"}</Button>
         </div>
     </div>
