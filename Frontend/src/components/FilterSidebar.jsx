@@ -45,7 +45,6 @@ const handleMinChange=(e)=>{
   const value = Number(e.target.value);
   if(value <= priceRange[1]) {
    setPriceRange([value ,priceRange[1]])
-         if (setShowFilters) setShowFilters(false)
 
     }
 }
@@ -54,7 +53,6 @@ const handleMaxChange = (e) =>{
   const value = Number(e.target.value);
   if(value >= priceRange[0]) {
    setPriceRange([priceRange[0],value])
-       if (setShowFilters) setShowFilters(false)
   }
 }
 
