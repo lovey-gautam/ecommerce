@@ -6,6 +6,7 @@ import e from 'cors'
 const FilterSidebar = ({search,setSearch,category,setCategory,brand,setBrand,setPriceRange,priceRange,allProducts}) => {
  // const priceRange = [0,5000]
   const Categories = allProducts.map(p=>p.category)//
+
   const UniqueCategory = ["All",...new Set(Categories)]
   console.log(UniqueCategory)
 
@@ -41,7 +42,7 @@ const resetFilters=()=>{
   setPriceRange([0,999999]) 
 }
   return ( 
-    <div className='bg-gray-100 mt-10 p-4 rounded-md hodden md:block w-64'>
+    <div className='bg-gray-100 mt-6 p-4 rounded-md hidden md:block w-64'>
       
       <Input 
        type = "text"
@@ -50,12 +51,15 @@ const resetFilters=()=>{
        onChange = {(e)=>setSearch(e.target.value)}
        className="bg-white p-2 rounded-md border-gray-400 border-2 w-full"/>
       {/*category */}
-      <h1 className='mt-5 font-semibold text-xl'>Category</h1>
-      <div className='flex flex-col gap-2 mt-3'>
+      <h1 className='mt-5 font-semibold text-lg'>Category</h1>
+      <div className='flex flex-col gap-2 mt-2'>
         {
                   UniqueCategory.map((item,index)=>(
                     <div key={index} className='flex items-center gap-2'>
-                      <input type="radio" checked={category===item} onChange={()=>handleCategoryClick(item)}/>
+                      <input
+                       type="radio" checked={category === item}
+                       onChange={()=>handleCategoryClick(item)}
+                       />
                       <label htmlFor ={`category-${index}`}>{item}</label>
 
                     </div>
@@ -64,7 +68,7 @@ const resetFilters=()=>{
       </div>
         {/*brands*/}
 
-      <h1 className='mt-5 font-semibold text-xl'>Brand</h1>
+      <h1 className='mt-5 font-semibold text-lg'>Brand</h1>
       <select className='bg-white w-full p-2 border-gray-200 border-2 rounded-md'
       value={brand}
       onChange={handleBrandChange}
@@ -77,7 +81,7 @@ const resetFilters=()=>{
         }
       </select>
     {/*price range */}
-    <h1 className='mt-5 font-semibold text-xl'>Price Range</h1>
+    <h1 className='mt-5 font-semibold text-lg'>Price Range</h1>
       <div className='flex flex-col gap-2'>
         <label>
           Price Rnage: ₹{priceRange[0]} - ₹{priceRange[1]}
