@@ -99,7 +99,7 @@ const Products = () => {
     console.log(allProducts)
   return (
     <div className='pt-20 pb-10'>
-      <div className='md:hidden flex gap-2 px-4 mb-4'>
+      <div className='md:hidden flex gap-2 px-4 mt-2 mb-4 sticky top-16 bg-white z-30'>
          <button
         onClick={() => setShowFilters(true)}
         className="bg-pink-600 text-white px-4 py-2 rounded-md"
@@ -137,6 +137,8 @@ const Products = () => {
             allProducts={allProducts}
             priceRange={priceRange}
             setPriceRange={setPriceRange}
+              setShowFilters={setShowFilters}   // ✅ ADD THIS
+
           />
         </div>
       </div>
@@ -155,6 +157,8 @@ const Products = () => {
         allProducts={allProducts}
         priceRange={priceRange}
         setPriceRange={setPriceRange}
+            setShowFilters={setShowFilters}   // ✅ ADD THIS
+
         />
  </div>
         {/*Main producr section   */}
