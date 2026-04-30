@@ -31,6 +31,8 @@ const FilterSidebar = ({
   const handleCategoryClick = (val)=>{
 
   setCategory(val)
+     if (setShowFilters) setShowFilters(false);
+
 }
 
 const handleBrandChange=(e)=>{
@@ -41,7 +43,8 @@ const handleBrandChange=(e)=>{
 
 const handleMinChange=(e)=>{
   const value = Number(e.target.value);
-  if{(value <= priceRange[1]) setPriceRange([value ,priceRange[1]])
+  if(value <= priceRange[1]) {
+   setPriceRange([value ,priceRange[1]])
          if (setShowFilters) setShowFilters(false)
 
     }
@@ -49,8 +52,8 @@ const handleMinChange=(e)=>{
 
 const handleMaxChange = (e) =>{
   const value = Number(e.target.value);
-  if{
-   (value >= priceRange[0]) setPriceRange([priceRange[0],value])
+  if(value >= priceRange[0]) {
+   setPriceRange([priceRange[0],value])
        if (setShowFilters) setShowFilters(false)
   }
 }
