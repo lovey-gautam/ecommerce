@@ -142,8 +142,8 @@ const Products = () => {
       </div>
     )}
 
-        <div className='max-w-7xl mx-auto flex gap-7'>
-
+        <div className='max-w-7xl mx-auto flex gap-7 px-4'>
+ <div className="hidden md:block">
         {/*sidebar*/}
         <FilterSidebar 
         search={search}
@@ -156,6 +156,7 @@ const Products = () => {
         priceRange={priceRange}
         setPriceRange={setPriceRange}
         />
+ </div>
         {/*Main producr section   */}
         <div className='flex flex-col flex-1'>
             <div className='flex justify-end mb-4'>
