@@ -126,6 +126,22 @@ const Products = () => {
           >
             Close ✕
           </button>
+
+          <FilterSidebar
+            search={search}
+            setSearch={setSearch}
+            brand={brand}
+            setBrand={setBrand}
+            category={category}
+            setCategory={setCategory}
+            allProducts={allProducts}
+            priceRange={priceRange}
+            setPriceRange={setPriceRange}
+          />
+        </div>
+      </div>
+    )}
+
         <div className='max-w-7xl mx-auto flex gap-7'>
 
         {/*sidebar*/}
