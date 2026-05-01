@@ -27,7 +27,6 @@ const items = [
 
 
 
-
 const Products = () => {
     const {products} = useSelector(store=> store.product)
     const [allProducts,setAllProducts] = useState([])
@@ -38,6 +37,7 @@ const Products = () => {
     const [priceRange,setPriceRange] = useState([0,999999])
     const dispatch = useDispatch()
     const [sortOrder,setSortOrder ] = useState('');
+    const [showFilters, setShowFilters] = useState(false); 
     const getAllProducts = async()=>{
         try{
           setLoading(true)
@@ -99,7 +99,53 @@ const Products = () => {
     console.log(allProducts)
   return (
     <div className='pt-20 pb-10'>
-      <div className='max-w-7xl mx-auto flex gap-7'>
+      <div className='md:hidden flex gap-2 px-4 mt-2 mb-4 sticky top-16 bg-white z-30'>
+         <button
+        onClick={() => setShowFilters(true)}
+        className="bg-pink-600 text-white px-4 py-2 rounded-md"
+      >
+        Filters
+      </button>
+
+         <input
+        type="text"
+        placeholder="Search..."
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+        className="flex-1 border p-2 rounded-md"
+      />
+      </div>
+          {/* ✅ MOBILE FILTER DRAWER */}
+    {showFilters && (
+      <div className="fixed inset-0 bg-black/40 z-50 flex">
+        <div className="bg-white w-72 p-4 overflow-y-auto">
+
+          <button
+            onClick={() => setShowFilters(false)}
+            className="mb-4 text-red-500 font-semibold"
+          >
+            Close ✕
+          </button>
+
+          <FilterSidebar
+            search={search}
+            setSearch={setSearch}
+            brand={brand}
+            setBrand={setBrand}
+            category={category}
+            setCategory={setCategory}
+            allProducts={allProducts}
+            priceRange={priceRange}
+            setPriceRange={setPriceRange}
+              setShowFilters={setShowFilters}   // ✅ ADD THIS
+
+          />
+        </div>
+      </div>
+    )}
+
+        <div className='max-w-7xl mx-auto flex gap-7 px-4'>
+ <div className="hidden md:block">
         {/*sidebar*/}
         <FilterSidebar 
         search={search}
@@ -111,7 +157,10 @@ const Products = () => {
         allProducts={allProducts}
         priceRange={priceRange}
         setPriceRange={setPriceRange}
+            setShowFilters={setShowFilters}   // ✅ ADD THIS
+
         />
+ </div>
         {/*Main producr section   */}
         <div className='flex flex-col flex-1'>
             <div className='flex justify-end mb-4'>
@@ -130,7 +179,7 @@ const Products = () => {
     </Select>
     </div> 
         {/*product grid */}
-   <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-7'>
+   <div className='grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4'>
     
      {
     products.map((product)=>{

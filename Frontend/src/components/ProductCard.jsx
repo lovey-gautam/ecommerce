@@ -44,24 +44,25 @@ const ProductCard = ({product,loading}) => {
     }
    console.log("Product images:", productImg);
   return (
-    <div className='shadow-lg rounded-lg overflow-hidden h-max'>
-      <div className='w-full h-full aspect-square overflow-hidden'>
+    <div className='flex gap-3 p-2 border rounded-lg shadow-sm items-center bg-white'>
+      <div className='w-24 h-24 flex-shrink-0 overflow-hidden rounded-md'>
         {
-          loading?<Skeleton className="w-full h-full rounded-lg"/>:
+          loading? (<Skeleton className="w-full h-full"/>
+                    ):(
           <img onClick={()=>navigate(`/products/${product._id}`)}
           src={productImg[0]?.url || '/placeholder.png' } alt="" 
             onError={(e) => { e.currentTarget.src = '/placeholder.png'; }}
 
-          className='w-full h-full transition-transform duration-300 hover:scale-105'/>
-
+          className='w-full h-full object-cover '/>
+)
         }
        </div>
        
-      <div className='px-2 space-y-1'>
-        <h1 className='font-semibold h-12 line-clamp-2'>{productName}</h1>
-        <h2 className='font-bold'>₹{productPrice.toLocaleString('en-IN')}</h2> 
-        <Button disabled ={loadingBtn} onClick ={()=>addToCart(product._id)} className="bg-pink-600 hover:bg-blue-950 mb-3 w-full">
-          <ShoppingCart/>{loadingBtn? "Adding...":"Add to Cart"}t</Button>
+      <div className='flex flex-col justify-between flex-1 h-full'>
+        <h1 className='text-sm font-medium line-clamp-2'>{productName}</h1>
+        <h2 className='text-pink-600 font-semibold text-sm'>₹{productPrice.toLocaleString('en-IN')}</h2> 
+        <Button size="sm" disabled ={loadingBtn} onClick ={()=>addToCart(product._id)} className="bg-pink-600 hover:bg-blue-950 text-xs py-1 mt-1 w-fit">
+          <ShoppingCart size={14}/>{loadingBtn? "Adding...":"Add"}</Button>
         </div>
     </div>
   )

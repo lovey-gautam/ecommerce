@@ -26,6 +26,9 @@ const mailConfiguration ={
 
 const info = await transporter.sendMail(mailConfiguration)//,function(error,info){
    // if(error) throw Error(error);
+        if (!info || !info.messageId) {
+  throw new Error("Email not sent");
+}
     console.log('OTP sent successfully ');
     console.log(info)
     return true;

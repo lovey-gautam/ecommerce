@@ -1,6 +1,7 @@
 import React from 'react'
 import {useState} from 'react'
 import { Button } from "@/components/ui/button"
+import { Loader2 } from "lucide-react"
 import {
   Card,
   CardContent,
@@ -36,6 +37,7 @@ const Signup=()=>{
     }
     const submitHandler=async(e)=>{
       e.preventDefault()
+        setLoading(true)
       console.log(formData)
       try{
 const res = await axios.post(`${import.meta.env.VITE_URL}/user/register`,formData,{

@@ -7,9 +7,12 @@ import {toast} from 'react-hot-toast'
 import { useDispatch,useSelector } from 'react-redux'
 import { setUser } from '@/redux/userSlice'
 import { useNavigate } from 'react-router-dom'
+import { useState } from 'react'
+
 const Navbar = () => {
 const {cart} = useSelector(store=>store.product)
 const {user} = useSelector(store=>store.user)
+  const [menuOpen, setMenuOpen] = React.useState(false)
   console.log("full state",user)  
   const admin = user?.role === "admin" ? true:false
   console.log(user?.role)
@@ -36,14 +39,19 @@ const navigate = useNavigate();
   console.log(cart)
   return (
     <header className='bg-pink-50 fixed w-full top-0 border-b border-pink-200'>
-     <div className='max-w-7xl mx-auto flex justify-between items-center py-3' >
+     <div className='max-w-7xl mx-auto flex justify-between items-center py-3 px-4' >
       <div className='flex items-center gap-2'>
         <span className='text-xl  font-bold text-pink-700'>Kart</span>
-        <img src="/ekart.jpg"alt ="Kart" className='w-[100px]'/>
+       <img src="/ekart.jpg" alt="Kart" className='w-16 md:w-24'/>
         
       </div>
-      <nav className='flex gap-10 justify-between items-center'>
-        <ul className='flex gap-7 items-center text-xl font-semibold'>
+        <button  className="md:hidden text-2xl"
+         onClick={() => setMenuOpen(!menuOpen)}>  
+           {menuOpen ? "✕" : "☰"}
+    </button>
+
+      <nav className='hidden md:flex gap-6 items-center'>
+        <ul className='flex gap-5 items-center text-base md:text-lg font-semibold'>
           <Link to={'/'}><li>Home</li></Link>
            <Link to={'/products'}><li>Products</li></Link>
    {
@@ -69,6 +77,39 @@ const navigate = useNavigate();
       </nav>
       
      </div>
+      {menuOpen && (
+  <div className="md:hidden flex flex-col gap-4 px-4 pb-4 bg-pink-50 border-t">
+    
+        <Link to="/" onClick={() => setMenuOpen(false)}>Home</Link>
+    <Link to="/products"  onClick={() => setMenuOpen(false)}>Products</Link>
+
+    {user && (
+      <Link to={`/profile/${user._id}`}  onClick={() => setMenuOpen(false)}>
+        Hello, {user.FirstName}
+      </Link>
+    )}
+
+    {admin && (
+      <Link to="/dashboard/sales"  onClick={() => setMenuOpen(false)}>Dashboard</Link>
+    )}
+
+    <Link to="/cart"  onClick={() => setMenuOpen(false)}>
+      Cart ({cart?.items?.length ?? 0})
+    </Link>
+
+    {user ? (
+    <Button onClick={() => { logoutHandler(); setMenuOpen(false); }}>
+  Logout
+</Button>
+    ) : (
+    <Button onClick={() => { navigate('/login'); setMenuOpen(false); }}>
+  Login
+</Button>
+    )}
+
+  </div>
+)}
+
     </header>
   )
 }
