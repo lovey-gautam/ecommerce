@@ -144,7 +144,7 @@ const Products = () => {
       </div>
     )}
 
-        <div className='max-w-7xl mx-auto flex gap-7 px-4'>
+        <div className='max-w-7xl mx-auto flex flex-col md:flex-row gap-7 px-4'>
  <div className="hidden md:block">
         {/*sidebar*/}
         <FilterSidebar 
