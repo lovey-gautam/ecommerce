@@ -65,7 +65,7 @@ const resetFilters=()=>{
 
 }
   return ( 
-    <div className='bg-gray-100 mt-6 p-4 rounded-md  w-64'>
+    <div className='bg-gray-100 mt-6 p-4 rounded-md w-full md:w-64'>
       
       <Input 
        type = "text"
