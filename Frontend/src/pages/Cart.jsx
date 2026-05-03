@@ -81,7 +81,7 @@ const Cart = () => {
       <div className="max-w-6xl mx-auto flex flex-col lg:flex-row gap-5">
 
         {/* LEFT CART */}
-        <div className="flex-1 flex flex-col gap-3 px-3 sm:px-0">
+        <div className="flex-1 flex flex-col gap-3 px-2 sm:px-0">
 
           {cart?.items?.map((product, index) => (
             <Card key={index} className="p-3 mx-1 sm:mx-0">
