@@ -8,11 +8,12 @@ import axios from 'axios'
 import { setCart } from '@/redux/productSlice'
 import toast from 'react-hot-toast'
 import { Separator } from "@/components/ui/separator"
+import { useNavigate } from "react-router-dom"
 
 const Cart = () => {
   const dispatch = useDispatch()
   const { cart = { items: [] } } = useSelector(store => store.product)
-
+const navigate = useNavigate()
   const subtotal = cart?.items?.reduce((acc, product) => {
     const price = Number(product.price || product?.productId?.productPrice || 0)
     const quantity = product?.quantity || 1
@@ -92,6 +93,8 @@ const Cart = () => {
                 <div className="flex items-center gap-3 flex-1 min-w-0">
 
                   <img
+                      onClick={() => navigate(`/product/${product?.productId?._id}`)}
+
                     src={product?.productId?.productImg?.[0]?.url || userLogo}
                     className="w-14 h-14 object-cover rounded"
                   />
