@@ -29,9 +29,7 @@ const Cart = () => {
   const loadCart = async () => {
     try {
       const res = await axios.get(API, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`
-        }
+        headers: { Authorization: `Bearer ${accessToken}` }
       })
 
       if (res.data.success) {
@@ -46,11 +44,7 @@ const Cart = () => {
     try {
       const res = await axios.put(`${API}/update`,
         { productId, type },
-        {
-          headers: {
-            Authorization: `Bearer ${accessToken}`
-          }
-        }
+        { headers: { Authorization: `Bearer ${accessToken}` } }
       )
 
       if (res.data.success) {
@@ -64,9 +58,7 @@ const Cart = () => {
   const handleRemove = async (productId) => {
     try {
       const res = await axios.delete(`${API}/remove`, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`
-        },
+        headers: { Authorization: `Bearer ${accessToken}` },
         data: { productId }
       })
 
@@ -86,22 +78,22 @@ const Cart = () => {
   return (
     <div className="pt-20 pb-24 bg-gray-50 min-h-screen">
 
-      <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-6">
+      <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-5">
 
         {/* LEFT CART */}
-        <div className="flex-1 flex flex-col gap-3 max-h-[65vh] overflow-y-auto pr-1">
+        <div className="flex-1 flex flex-col gap-3 max-h-[65vh] overflow-y-auto pr-2">
 
           {cart?.items?.map((product, index) => (
             <Card key={index} className="p-3">
 
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
 
-                {/* IMAGE + NAME */}
-                <div className="flex items-center gap-3 min-w-0">
+                {/* LEFT */}
+                <div className="flex items-center gap-3 flex-1 min-w-0">
 
                   <img
                     src={product?.productId?.productImg?.[0]?.url || userLogo}
-                    className="w-14 h-14 object-cover rounded flex-shrink-0"
+                    className="w-14 h-14 object-cover rounded"
                   />
 
                   <div className="min-w-0">
@@ -115,11 +107,11 @@ const Cart = () => {
 
                 </div>
 
-                {/* ACTIONS */}
+                {/* RIGHT */}
                 <div className="flex items-center justify-between sm:justify-end gap-3 w-full sm:w-auto">
 
-                  {/* QTY */}
                   <div className="flex items-center gap-2">
+
                     <Button
                       size="sm"
                       variant="outline"
@@ -143,9 +135,9 @@ const Cart = () => {
                     >
                       +
                     </Button>
+
                   </div>
 
-                  {/* PRICE */}
                   <p className="font-semibold text-sm min-w-[70px] text-right">
                     ₹{Number(
                       product.price ||
@@ -154,10 +146,9 @@ const Cart = () => {
                     ).toLocaleString('en-IN')}
                   </p>
 
-                  {/* REMOVE */}
                   <Trash2
                     onClick={() => handleRemove(product?.productId?._id)}
-                    className="w-5 h-5 text-red-500 cursor-pointer flex-shrink-0"
+                    className="w-5 h-5 text-red-500 cursor-pointer"
                   />
 
                 </div>
@@ -211,3 +202,4 @@ const Cart = () => {
 }
 
 export default Cart
+                
