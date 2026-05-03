@@ -27,9 +27,9 @@ const ProductImg = ({images=[]}) => {
            key={idx}
            src={img.url} alt=""
           
-           className={`cursor-pointer w-14 h-14 sm:w-14 sm:h-14 md:w-16 md:h-16  object-cover border ${mainImg === img.url ? 'border-pink-600 ' : ''}`}
+           className={`cursor-pointer w-14 h-14 sm:w-14 sm:h-14 md:w-16 md:h-16  object-cover border ${mainImg === img.url ? 'border-pink-600` : ''}`}
            />
-        )) }
+        ))}
       </div>
       <div className = "flex-1 flex justify-center">
       <Zoom>
