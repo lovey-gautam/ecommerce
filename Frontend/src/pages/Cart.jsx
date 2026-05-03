@@ -186,6 +186,19 @@ const loadCart = async()=>{
     </div>
     
   ) }
+        <div className='fixed bottom-0 left-0 right-0 p-3 bg-white border-t lg:hidden'>
+
+                <Button onClick={()=>navigate('/address')} className='w-full bg-pink-600'>PLACE ORDER</Button>
+                </div>
+                <Button variant='outline' className='w-full bg-transparent'>
+                  <Link to="/products">Continue Shopping</Link>
+                </Button>
+                </div>   
+                <div className='text-sm text-muted-foreground pt-4'>
+                  <p>*Free shipping on orders  over 299</p>
+                  <p>* 30 days return policy</p>
+                  <p>* Secure checkout with SSL encryption</p>
+                  </div> 
       
     </div >
     
