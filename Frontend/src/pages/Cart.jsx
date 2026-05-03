@@ -90,55 +90,74 @@ console.log("CART API RESPONSE:", res.data)
 
   return (
 
-  <div className='pt-20 pb-24 bg-gray-50 min-h-screen'>
+ <Card key={index} className="p-3">
 
-    <div className='flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3'>
+  <div className='flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3'>
 
-  {/* LEFT */}
-  <div className='flex items-center gap-3 flex-1'>
-    <img
-      src={product?.productId?.productImg?.[0]?.url || userLogo}
-      className='w-14 h-14 object-cover rounded'
-    />
+    {/* LEFT SIDE */}
+    <div className='flex items-center gap-3 flex-1 min-w-0'>
 
-    <div className='min-w-0'>
-      <h1 className='font-medium text-sm truncate max-w-[160px]'>
-        {product?.productId?.productName}
-      </h1>
-      <p className='text-xs text-gray-500'>
-        ₹{product?.productId?.productPrice}
+      <img
+        src={product?.productId?.productImg?.[0]?.url || userLogo}
+        className='w-14 h-14 object-cover rounded'
+      />
+
+      <div className='min-w-0'>
+        <h1 className='font-medium text-sm truncate max-w-[160px]'>
+          {product?.productId?.productName}
+        </h1>
+        <p className='text-xs text-gray-500'>
+          ₹{product?.productId?.productPrice}
+        </p>
+      </div>
+    </div>
+
+    {/* RIGHT SIDE (STACK ON MOBILE) */}
+    <div className='flex items-center justify-between sm:justify-end gap-3 w-full sm:w-auto'>
+
+      {/* QTY */}
+      <div className='flex items-center gap-2'>
+        <Button
+          size="sm"
+          variant="outline"
+          onClick={() =>
+            handleUpdateQuantity(product.productId._id, 'decrease')
+          }
+        >
+          -
+        </Button>
+
+        <span className="text-sm">{product.quantity}</span>
+
+        <Button
+          size="sm"
+          variant="outline"
+          onClick={() =>
+            handleUpdateQuantity(product.productId._id, 'increase')
+          }
+        >
+          +
+        </Button>
+      </div>
+
+      {/* PRICE */}
+      <p className='font-semibold text-sm w-[70px] text-right'>
+        ₹{Number(
+          product.price ||
+          product?.productId?.productPrice ||
+          0
+        ).toLocaleString('en-IN')}
       </p>
-    </div>
-  </div>
 
-  {/* QTY + PRICE + REMOVE (mobile stacked) */}
-  <div className='flex items-center justify-between sm:justify-end gap-3 w-full sm:w-auto'>
-
-    {/* QTY */}
-    <div className='flex items-center gap-2'>
-      <Button size="sm" variant="outline"
-        onClick={() => handleUpdateQuantity(product.productId._id, 'decrease')}
-      >-</Button>
-
-      <span className="text-sm">{product.quantity}</span>
-
-      <Button size="sm" variant="outline"
-        onClick={() => handleUpdateQuantity(product.productId._id, 'increase')}
-      >+</Button>
+      {/* REMOVE */}
+      <Trash2
+        onClick={() => handleRemove(product?.productId?._id)}
+        className='w-5 h-5 text-red-500 cursor-pointer'
+      />
     </div>
 
-    {/* PRICE */}
-    <p className='font-semibold text-sm w-[70px] text-right'>
-      ₹{Number(product.price || product?.productId?.productPrice || 0).toLocaleString('en-IN')}
-    </p>
-
-    {/* REMOVE */}
-    <Trash2
-      onClick={() => handleRemove(product?.productId?._id)}
-      className='w-5 h-5 text-red-500 cursor-pointer'
-    />
   </div>
-</div>
+</Card>
     {/* RIGHT - ORDER SUMMARY */}
     <div className='w-full lg:w-[400px]'>
       <Card>
