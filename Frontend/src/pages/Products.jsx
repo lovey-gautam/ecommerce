@@ -192,6 +192,7 @@ const Products = () => {
   <p className="text-center text-gray-500 mt-10">
     No products found
   </p>
+      )}
         </div>
      </div>
  </div>
