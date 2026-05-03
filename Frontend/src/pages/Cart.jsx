@@ -1,22 +1,17 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import userLogo from '../assets/userLogo.webp'
-import { Card } from '@/components/ui/card'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Trash2, ShoppingCart } from 'lucide-react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Trash2 } from 'lucide-react'
 import axios from 'axios'
 import { setCart } from '@/redux/productSlice'
 import toast from 'react-hot-toast'
-import {  CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Separator } from "@/components/ui/separator"
 
 const Cart = () => {
-  const navigate = useNavigate()
-  const { cart= { items: [] } } = useSelector(store => store.product)
-  console.log(cart)
   const dispatch = useDispatch()
+  const { cart = { items: [] } } = useSelector(store => store.product)
 
   const subtotal = cart?.items?.reduce((acc, product) => {
     const price = Number(product.price || product?.productId?.productPrice || 0)
@@ -38,7 +33,7 @@ const Cart = () => {
           Authorization: `Bearer ${accessToken}`
         }
       })
-console.log("CART API RESPONSE:", res.data)
+
       if (res.data.success) {
         dispatch(setCart(res.data.cart || { items: [] }))
       }
@@ -77,7 +72,7 @@ console.log("CART API RESPONSE:", res.data)
 
       if (res.data.success) {
         dispatch(setCart(res.data.cart))
-        toast.success('Product removed from cart')
+        toast.success("Product removed")
       }
     } catch (error) {
       console.log(error)
@@ -86,115 +81,133 @@ console.log("CART API RESPONSE:", res.data)
 
   useEffect(() => {
     loadCart()
-  }, [dispatch])
+  }, [])
 
   return (
+    <div className="pt-20 pb-24 bg-gray-50 min-h-screen">
 
- <Card key={index} className="p-3">
+      <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-6">
 
-  <div className='flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3'>
+        {/* LEFT CART */}
+        <div className="flex-1 flex flex-col gap-3 max-h-[65vh] overflow-y-auto pr-1">
 
-    {/* LEFT SIDE */}
-    <div className='flex items-center gap-3 flex-1 min-w-0'>
+          {cart?.items?.map((product, index) => (
+            <Card key={index} className="p-3">
 
-      <img
-        src={product?.productId?.productImg?.[0]?.url || userLogo}
-        className='w-14 h-14 object-cover rounded'
-      />
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
 
-      <div className='min-w-0'>
-        <h1 className='font-medium text-sm truncate max-w-[160px]'>
-          {product?.productId?.productName}
-        </h1>
-        <p className='text-xs text-gray-500'>
-          ₹{product?.productId?.productPrice}
-        </p>
+                {/* IMAGE + NAME */}
+                <div className="flex items-center gap-3 min-w-0">
+
+                  <img
+                    src={product?.productId?.productImg?.[0]?.url || userLogo}
+                    className="w-14 h-14 object-cover rounded flex-shrink-0"
+                  />
+
+                  <div className="min-w-0">
+                    <h1 className="font-medium text-sm truncate max-w-[150px]">
+                      {product?.productId?.productName}
+                    </h1>
+                    <p className="text-xs text-gray-500">
+                      ₹{product?.productId?.productPrice}
+                    </p>
+                  </div>
+
+                </div>
+
+                {/* ACTIONS */}
+                <div className="flex items-center justify-between sm:justify-end gap-3 w-full sm:w-auto">
+
+                  {/* QTY */}
+                  <div className="flex items-center gap-2">
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      onClick={() =>
+                        handleUpdateQuantity(product.productId._id, 'decrease')
+                      }
+                    >
+                      -
+                    </Button>
+
+                    <span className="text-sm w-6 text-center">
+                      {product.quantity}
+                    </span>
+
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      onClick={() =>
+                        handleUpdateQuantity(product.productId._id, 'increase')
+                      }
+                    >
+                      +
+                    </Button>
+                  </div>
+
+                  {/* PRICE */}
+                  <p className="font-semibold text-sm min-w-[70px] text-right">
+                    ₹{Number(
+                      product.price ||
+                      product?.productId?.productPrice ||
+                      0
+                    ).toLocaleString('en-IN')}
+                  </p>
+
+                  {/* REMOVE */}
+                  <Trash2
+                    onClick={() => handleRemove(product?.productId?._id)}
+                    className="w-5 h-5 text-red-500 cursor-pointer flex-shrink-0"
+                  />
+
+                </div>
+
+              </div>
+            </Card>
+          ))}
+
+        </div>
+
+        {/* RIGHT SUMMARY */}
+        <div className="w-full lg:w-[400px]">
+
+          <Card>
+            <CardHeader>
+              <CardTitle>Order Summary</CardTitle>
+            </CardHeader>
+
+            <CardContent className="space-y-4">
+
+              <div className="flex justify-between">
+                <span>Subtotal ({cart?.items?.length})</span>
+                <span>₹{subtotal.toLocaleString('en-IN')}</span>
+              </div>
+
+              <div className="flex justify-between">
+                <span>Shipping</span>
+                <span>₹{shipping.toLocaleString('en-IN')}</span>
+              </div>
+
+              <div className="flex justify-between">
+                <span>Tax</span>
+                <span>₹{tax.toLocaleString('en-IN')}</span>
+              </div>
+
+              <Separator />
+
+              <div className="flex justify-between font-bold text-lg">
+                <span>Total</span>
+                <span>₹{total.toLocaleString('en-IN')}</span>
+              </div>
+
+            </CardContent>
+          </Card>
+
+        </div>
+
       </div>
     </div>
-
-    {/* RIGHT SIDE (STACK ON MOBILE) */}
-    <div className='flex items-center justify-between sm:justify-end gap-3 w-full sm:w-auto'>
-
-      {/* QTY */}
-      <div className='flex items-center gap-2'>
-        <Button
-          size="sm"
-          variant="outline"
-          onClick={() =>
-            handleUpdateQuantity(product.productId._id, 'decrease')
-          }
-        >
-          -
-        </Button>
-
-        <span className="text-sm">{product.quantity}</span>
-
-        <Button
-          size="sm"
-          variant="outline"
-          onClick={() =>
-            handleUpdateQuantity(product.productId._id, 'increase')
-          }
-        >
-          +
-        </Button>
-      </div>
-
-      {/* PRICE */}
-      <p className='font-semibold text-sm w-[70px] text-right'>
-        ₹{Number(
-          product.price ||
-          product?.productId?.productPrice ||
-          0
-        ).toLocaleString('en-IN')}
-      </p>
-
-      {/* REMOVE */}
-      <Trash2
-        onClick={() => handleRemove(product?.productId?._id)}
-        className='w-5 h-5 text-red-500 cursor-pointer'
-      />
-    </div>
-
-  </div>
-</Card>
-    {/* RIGHT - ORDER SUMMARY */}
-    <div className='w-full lg:w-[400px]'>
-      <Card>
-        <CardHeader>
-          <CardTitle>Order Summary</CardTitle>
-        </CardHeader>
-
-        <CardContent className='space-y-4'>
-
-          <div className='flex justify-between'>
-            <span>Subtotal ({cart?.items?.length} items)</span>
-            <span>₹{subtotal.toLocaleString('en-IN')}</span>
-          </div>
-
-          <div className='flex justify-between'>
-            <span>Shipping</span>
-            <span>₹{shipping.toLocaleString('en-IN')}</span>
-          </div>
-
-          <div className='flex justify-between'>
-            <span>Tax (5%)</span>
-            <span>₹{tax.toLocaleString('en-IN')}</span>
-          </div>
-
-          <Separator />
-
-          <div className='flex justify-between font-bold text-lg'>
-            <span>Total</span>
-            <span>₹{total.toLocaleString('en-IN')}</span>
-          </div>
-
-        </CardContent>
-      </Card>
-    </div>
-
-  </div>
-</div>
-);
+  )
 }
-export default Cart;
+
+export default Cart
