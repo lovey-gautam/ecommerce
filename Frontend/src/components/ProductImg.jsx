@@ -20,17 +20,17 @@ const ProductImg = ({images=[]}) => {
     <div className='flex flex-col md:flex-row gap-4 w-full'>
       <div className='flex md:flex-col flex-row gap-2 
                       overflow-x-auto md:overflow-y-auto 
-                      max-h-[400px]'> {
+                      max-h-[400px]'> 
         
-        images.map((img,idx)=>(
+         {images.map((img,idx)=>(
          <img onClick={()=>setMainImg(img.url)}
            key={idx}
            src={img.url} alt=""
           
            className={`cursor-pointer w-14 h-14 sm:w-14 sm:h-14 md:w-16 md:h-16  object-cover border 
-              ${mainImg === img.url ? 'border-pink-600 ' : ''}`}/>
-        ))
-        }
+              ${mainImg === img.url ? 'border-pink-600 ' : ''}`}
+           />
+        )) }
       </div>
       <div className = "flex-1 flex justify-center">
       <Zoom>
