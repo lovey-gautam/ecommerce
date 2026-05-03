@@ -29,7 +29,8 @@ const items = [
 
 const Products = () => {
     const {products} = useSelector(store=> store.product)
-    const [allProducts,setAllProducts] = useState([])
+  const allProducts = useSelector(store => store.product.allProducts)
+   // const [allProducts,setAllProducts] = useState([])
     const [loading,setLoading] = useState(false)
     const [search,setSearch] = useState("")
     const [category,setCategory] = useState("All")
@@ -63,7 +64,7 @@ const Products = () => {
       let filtered = [...allProducts]
 
       if(search.trim() !== ""){
-        filtered = filtered.filter(p=>p.productName ?.toLowerCase().includes(search.toLowerCase()))
+        filtered = filtered.filter(p=>p.productName?.toLowerCase().includes(search.toLowerCase()))
       }
 
       if(category !=="All"){
