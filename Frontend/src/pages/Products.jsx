@@ -1,11 +1,13 @@
 import FilterSidebar from '@/components/FilterSidebar'
-import React, { useEffect, useState, useMemo } from 'react'
+import React, { useEffect, useState } from 'react'
+
 import axios from 'axios'
 import {
   Select,
   SelectContent,
   SelectGroup,
   SelectItem,
+  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
@@ -14,137 +16,117 @@ import { toast } from 'sonner'
 import { useDispatch, useSelector } from 'react-redux'
 import { setProducts } from '@/redux/productSlice'
 
+const items = [
+  { label: "Select a fruit", value: null },
+  { label: "Apple", value: "apple" },
+  { label: "Banana", value: "banana" },
+  { label: "Blueberry", value: "blueberry" },
+  { label: "Grapes", value: "grapes" },
+  { label: "Pineapple", value: "pineapple" },
+]
+
+
+
 const Products = () => {
+    const {products} = useSelector(store=> store.product)
+    const [allProducts,setAllProducts] = useState([])
+    const [loading,setLoading] = useState(false)
+    const [search,setSearch] = useState("")
+    const [category,setCategory] = useState("All")
+    const [brand,setBrand] = useState("All")
+    const [priceRange,setPriceRange] = useState([0,999999])
+    const dispatch = useDispatch()
+    const [sortOrder,setSortOrder ] = useState('');
+    const [showFilters, setShowFilters] = useState(false); 
+    const getAllProducts = async()=>{
+        try{
+          setLoading(true)
+            const res = await axios.get(`${import.meta.env.VITE_URL}/products/getallproducts`);
+        if(res.data.success){
+            setAllProducts(res.data.products)
+            dispatch(setProducts(res.data.products))
+       
+        }
+        }
+        catch(error){
+            console.log(error)
+            toast.error(error.response.data.message)
+        }
+        finally{
+            setLoading(false)
+        }
+    }
 
-  // Redux products (source of truth)
-  const products = useSelector(store => store.product.products)
+    useEffect(()=>{
+      if(allProducts.length==0) return;
 
-  const dispatch = useDispatch()
+      let filtered = [...allProducts]
 
-  const [loading, setLoading] = useState(false)
-  const [search, setSearch] = useState("")
-  const [category, setCategory] = useState("All")
-  const [brand, setBrand] = useState("All")
-  const [priceRange, setPriceRange] = useState([0, 999999])
-  const [sortOrder, setSortOrder] = useState('')
-  const [showFilters, setShowFilters] = useState(false)
-
-  // Fetch products once
-  const getAllProducts = async () => {
-    try {
-      setLoading(true)
-
-      const res = await axios.get(
-        `${import.meta.env.VITE_URL}/products/getallproducts`
-      )
-
-      if (res.data.success) {
-        dispatch(setProducts(res.data.products))
+      if(search.trim() !== ""){
+        filtered = filtered.filter(p=>p.productName ?.toLowerCase().includes(search.toLowerCase()))
       }
 
-    } catch (error) {
-      console.log(error)
-      toast.error(error?.response?.data?.message || "Error fetching products")
-    } finally {
-      setLoading(false)
+      if(category !=="All"){
+        filtered = filtered.filter(p=>p.category === category)
+      }
+
+      if(brand !=="All"){
+        filtered = filtered.filter(p=>p.brand === brand)
+      }
+      filtered = filtered.filter(p=>p.productPrice >= priceRange[0] && p.productPrice <=priceRange[1])
+
+      if(sortOrder === "low to high"){
+        filtered.sort((a,b)=>a.productPrice-b.productPrice)
+      }
+
+      else if(sortOrder === "high to low"){
+        filtered.sort((a,b)=>b.productPrice-a.productPrice)
+      }
+      dispatch(setProducts(filtered))
+    },[search,category,brand,sortOrder,priceRange,allProducts,dispatch])
+
+
+    /*useEffect(() => {
+    if (products.length === 0) {
+        getAllProducts()
+    } else {
+        setAllProducts(products)
     }
-  }
-
-  useEffect(() => {
-    getAllProducts()
-  }, [])
-
-  // ✅ FILTER LOGIC (NO REDUX DISPATCH HERE)
-  const filteredProducts = useMemo(() => {
-
-    let filtered = [...products]
-
-    if (search.trim()) {
-      filtered = filtered.filter(p =>
-        (p.productName || "")
-          .toLowerCase()
-          .includes(search.toLowerCase())
-      )
-    }
-
-    if (category !== "All") {
-      filtered = filtered.filter(p => p.category === category)
-    }
-
-    if (brand !== "All") {
-      filtered = filtered.filter(p => p.brand === brand)
-    }
-
-    filtered = filtered.filter(
-      p =>
-        p.productPrice >= priceRange[0] &&
-        p.productPrice <= priceRange[1]
-    )
-
-    if (sortOrder === "low to high") {
-      filtered = [...filtered].sort((a, b) => a.productPrice - b.productPrice)
-    }
-
-    if (sortOrder === "high to low") {
-      filtered = [...filtered].sort((a, b) => b.productPrice - a.productPrice)
-    }
-
-    return filtered
-  }, [products, search, category, brand, priceRange, sortOrder])
-
+}, [])*/
+    useEffect(()=>{
+        getAllProducts()
+    },[])
+    console.log(allProducts)
   return (
     <div className='pt-20 pb-10'>
+      <div className='md:hidden flex gap-2 px-4 py-2  mb-4 sticky top-16 bg-white z-30 shadow-sm'>
+         <button
+        onClick={() => setShowFilters(true)}
+        className="bg-pink-600 text-white px-4 py-2 rounded-md"
+      >
+        Filters
+      </button>
 
-      {/* MOBILE TOP BAR */}
-      <div className='md:hidden flex gap-2 px-4 py-2 mb-4 sticky top-16 bg-white z-30 shadow-sm'>
-
-        <button
-          onClick={() => setShowFilters(true)}
-          className="bg-pink-600 text-white px-4 py-2 rounded-md"
-        >
-          Filters
-        </button>
-
-        <input
-          type="text"
-          placeholder="Search..."
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          className="flex-1 border p-2 rounded-md"
-        />
+         <input
+        type="text"
+        placeholder="Search..."
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+        className="flex-1 border p-2 rounded-md"
+      />
       </div>
+          {/* ✅ MOBILE FILTER DRAWER */}
+    {showFilters && (
+      <div className="fixed inset-0 bg-black/40 z-50 flex">
+        <div className="bg-white w-72 p-4 overflow-y-auto">
 
-      {/* MOBILE FILTER DRAWER */}
-      {showFilters && (
-        <div className="fixed inset-0 bg-black/40 z-50 flex">
-          <div className="bg-white w-72 p-4 overflow-y-auto">
+          <button
+            onClick={() => setShowFilters(false)}
+            className="mb-4 text-red-500 font-semibold"
+          >
+            Close ✕
+          </button>
 
-            <button
-              onClick={() => setShowFilters(false)}
-              className="mb-4 text-red-500 font-semibold"
-            >
-              Close ✕
-            </button>
-
-            <FilterSidebar
-              search={search}
-              setSearch={setSearch}
-              brand={brand}
-              setBrand={setBrand}
-              category={category}
-              setCategory={setCategory}
-              priceRange={priceRange}
-              setPriceRange={setPriceRange}
-              setShowFilters={setShowFilters}
-            />
-          </div>
-        </div>
-      )}
-
-      <div className='max-w-7xl mx-auto flex flex-col md:flex-row gap-6 px-3 md:px-4'>
-
-        {/* SIDEBAR */}
-        <div className="hidden md:block">
           <FilterSidebar
             search={search}
             setSearch={setSearch}
@@ -152,54 +134,67 @@ const Products = () => {
             setBrand={setBrand}
             category={category}
             setCategory={setCategory}
+            allProducts={allProducts}
             priceRange={priceRange}
             setPriceRange={setPriceRange}
-            setShowFilters={setShowFilters}
+              setShowFilters={setShowFilters}   // ✅ ADD THIS
+
           />
         </div>
-
-        {/* MAIN */}
-        <div className='flex flex-col flex-1 px-1'>
-
-          {/* SORT */}
-          <div className='flex justify-end mb-4'>
-            <Select onValueChange={(value) => setSortOrder(value)}>
-              <SelectTrigger className="w-[200px]">
-                <SelectValue placeholder="Sort by Price" />
-              </SelectTrigger>
-
-              <SelectContent>
-                <SelectGroup>
-                  <SelectItem value="low to high">Low → High</SelectItem>
-                  <SelectItem value="high to low">High → Low</SelectItem>
-                </SelectGroup>
-              </SelectContent>
-            </Select>
-          </div>
-
-          {/* PRODUCTS GRID */}
-          <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 p-2 mt-2'>
-
-            {filteredProducts.map((product) => (
-              <ProductCard
-                key={product._id}
-                product={product}
-                loading={loading}
-              />
-            ))}
-
-          </div>
-
-          {/* EMPTY STATE */}
-          {filteredProducts.length === 0 && (
-            <p className="text-center text-gray-500 mt-10">
-              No products found
-            </p>
-          )}
-
-        </div>
       </div>
-    </div>
+    )}
+
+        <div className='max-w-7xl mx-auto flex flex-col md:flex-row gap-6 px-3 md:px-4'>
+ <div className="hidden md:block">
+        {/*sidebar*/}
+        <FilterSidebar 
+        search={search}
+        setSearch={setSearch}
+        brand={brand}
+        setBrand={setBrand}
+        category={category}
+        setCategory={setCategory}
+        allProducts={allProducts}
+        priceRange={priceRange}
+        setPriceRange={setPriceRange}
+            setShowFilters={setShowFilters}   // ✅ ADD THIS
+
+        />
+ </div>
+        {/*Main producr section   */}
+        <div className='flex flex-col flex-1 px-1'>
+            <div className='flex justify-end mb-4'>
+                <Select onValueChange={(value)=>setSortOrder(value)}>
+                  <SelectTrigger className="w-[200px]">
+        <SelectValue placeholder="Sort by Price"/>
+      </SelectTrigger>
+      <SelectContent>
+        <SelectGroup>
+          
+          <SelectItem value="low to high">Price: Low to High</SelectItem>
+         <SelectItem value="high to low">Price: High to Low </SelectItem>
+
+        </SelectGroup>
+      </SelectContent>
+    </Select>
+    </div> 
+        {/*product grid */}
+   <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 p-2 mt-2'>
+     {
+    products.map((product)=>{
+      return  <ProductCard key={product._id} product={product} loading={loading}/>
+    })
+    }
+     </div> 
+         
+  {products.length === 0 && (
+  <p className="text-center text-gray-500 mt-10">
+    No products found
+  </p>
+      )}
+        </div>
+     </div>
+ </div>
   )
 }
 
@@ -216,5 +211,4 @@ export default Products
 
 
 
-
-
+             
