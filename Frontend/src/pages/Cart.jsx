@@ -89,81 +89,72 @@ console.log("CART API RESPONSE:", res.data)
   }, [dispatch])
 
   return (
-  <div className='pt-20 pb-24 bg-gray-50 min-h-screen'>
-    {
-      cart?.items?.length > 0 ? (
-        <div className='max-w-7xl mx-auto'>
-          
-          <h1 className='text-2xl font-bold text-gray-800 mb-7'>
-            Shopping Cart
-          </h1>
+   <div className='flex flex-col gap-3 max-h-[70vh] overflow-y-auto pr-2'>
+  {cart?.items?.map((product, index) => (
+    <Card key={index} className="p-2">
+      <div className='flex items-center justify-between gap-2'>
 
-          <div className='max-w-7xl mx-auto flex flex-col lg:flex-row gap-4 lg:gap-7'>
+        {/* LEFT IMAGE + NAME */}
+        <div className='flex items-center gap-3 flex-1 min-w-0'>
+          <img
+            src={product?.productId?.productImg?.[0]?.url || userLogo}
+            className='w-12 h-12 object-cover rounded'
+          />
 
-            {/* LEFT - CART ITEMS */}
-            <div className='flex flex-col gap-3 max-h-[70vh] overflow-y-auto pr-2 flex-1 order-1 lg:order-none'>
-              {cart?.items?.map((product, index) => (
-                <Card className="p-2" key={index}>
-                  <div className='flex items-center justify-between gap-2 py-1'>
+          <div className='min-w-0'>
+            <h1 className='font-medium text-sm truncate max-w-[120px]'>
+              {product?.productId?.productName}
+            </h1>
+            <p className='text-xs text-gray-500'>
+              ₹{product?.productId?.productPrice}
+            </p>
+          </div>
+        </div>
 
-                    <div className='flex items-center w-full lg:w-[350px]'>
-                      <img
-                        src={product?.productId?.productImg?.[0]?.url || userLogo}
-                        className='w-16 h-16 object-cover'
-                      />
+        {/* QUANTITY */}
+        <div className='flex items-center gap-2'>
+          <Button
+            size="sm"
+            variant="outline"
+            onClick={() =>
+              handleUpdateQuantity(product.productId._id, 'decrease')
+            }
+          >
+            -
+          </Button>
 
-                      <div className='flex flex-col'>
-                        <h1 className='font-semibold text-sm truncate max-w-[140px]'>
-                          {product?.productId?.productName}
-                        </h1>
-                        <p className='text-xs text-gray-600'>
-                          ₹{product?.productId?.productPrice}</p>
-                      </div>
-                    </div>
+          <span className="text-sm">{product.quantity}</span>
 
-                    <div className='flex items-center gap-2'>
-                      <Button size= "sm" type='button'
-                        onClick={() =>
-                          handleUpdateQuantity(product.productId._id, 'decrease')
-                        }
-                        variant='outline' > -
-                      </Button>
+          <Button
+            size="sm"
+            variant="outline"
+            onClick={() =>
+              handleUpdateQuantity(product.productId._id, 'increase')
+            }
+          >
+            +
+          </Button>
+        </div>
 
-                      <span className="text-sm">{product.quantity}</span>
+        {/* PRICE */}
+        <p className='font-semibold text-sm w-[70px] text-right'>
+          ₹{Number(
+            product.price ||
+            product?.productId?.productPrice ||
+            0
+          ).toLocaleString('en-IN')}
+        </p>
 
-                      <Button size ="sm"
-                        type='button'
-                        onClick={() =>
-                          handleUpdateQuantity(product.productId._id, 'increase')
-                        }
-                        variant='outline'
-                      >
-                        +
-                      </Button>
-                    </div>
-
-                    <p className='font-semibold text-sm whitespace-nowrap'>
-                      ₹
-                      {Number(
-                        product.price ||
-                        product?.productId?.productPrice ||
-                        0
-                      ).toLocaleString('en-IN')}
-                    </p>
-
-                    <p
-                      onClick={() => handleRemove(product?.productId?._id)}
-                      className='flex text-red-500 items-center gap-1 cursor-pointer text-sm'
-                    >
-                      <Trash2 className='w-4 h-4' />
-                      Remove
-                    </p>
-                  </div>
-                </Card>
-              ))}
-            </div>
-
-            {/* RIGHT - ORDER SUMMARY */}
+        {/* REMOVE */}
+        <Trash2
+          onClick={() => handleRemove(product?.productId?._id)}
+          className='w-4 h-4 text-red-500 cursor-pointer'
+        />
+      </div>
+    </Card>
+  ))}
+</div>
+    {/* RIGHT - ORDER SUMMARY */}
             <div className='order-2 lg:order-none'>
               <Card className='w-full lg:w-[400px]'>
 
