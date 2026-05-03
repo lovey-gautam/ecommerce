@@ -44,7 +44,7 @@ const ProductCard = ({product,loading}) => {
     }
    console.log("Product images:", productImg);
   return (
-    <div className='flex gap-3 p-2 border rounded-lg shadow-sm items-center bg-white'>
+    <div className='flex gap-3 p-3 border rounded-lg shadow-sm h-full bg-white'>
       <div className='w-24 h-24 flex-shrink-0 overflow-hidden rounded-md'>
         {
           loading? (<Skeleton className="w-full h-full"/>
@@ -53,14 +53,14 @@ const ProductCard = ({product,loading}) => {
           src={productImg[0]?.url || '/placeholder.png' } alt="" 
             onError={(e) => { e.currentTarget.src = '/placeholder.png'; }}
 
-          className='w-full h-full object-cover '/>
+          className='w-full h-full overflow-hidden rounded-md object-cover '/>
 )
         }
        </div>
        
       <div className='flex flex-col justify-between flex-1 h-full'>
         <h1 className='text-sm font-medium line-clamp-2'>{productName}</h1>
-        <h2 className='text-pink-600 font-semibold text-sm'>₹{productPrice.toLocaleString('en-IN') || 0}</h2> 
+        <h2 className='text-pink-600 font-semibold text-sm'>₹{productPrice.toLocaleString('en-IN') : "0"}</h2> 
         <Button size="sm" disabled ={loadingBtn} onClick ={()=>addToCart(product._id)} className="bg-pink-600 hover:bg-blue-950 text-xs py-1 mt-1 w-fit">
           <ShoppingCart size={14}/>{loadingBtn? "Adding...":"Add"}</Button>
         </div>
