@@ -197,11 +197,12 @@ const Cart = () => {
         </div>
 
       </div>
-    </div>
+  
     <div className='fixed bottom-0 left-0 right-0 p-3 bg-white border-t lg:hidden z-50'> 
     <Button onClick={() => navigate('/address')} className='w-full bg-pink-600' >
       PLACE ORDER 
     </Button> </div> 
+    </div>
     
     
   )
