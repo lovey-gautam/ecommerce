@@ -99,20 +99,20 @@ const loadCart = async()=>{
         <div className='flex flex-col gap-5 flex-1'>
           {cart?.items?.map((product,index)=>{
             return <Card key={index} >
-              <div className='flex justify-between items-center pr-7'>
-                <div className='flex items-center w-[350px]'>
+              <div className='flex flex-col lg:flex-row lg:justify-between lg:items-center gap-4 pr-4 lg:pr-7'>
+                <div className='flex items-center w-full  lg:w-[350px]'>
                   <img src={product?.productId?.productImg?.[0]?.url || userLogo} alt="" className='w-25 h-25'/>
                   <div className='w-[280px]'>
                     <h1 className='font-semibold truncate'>{product?.productId?.productName}</h1>
                     <p>₹{product?.productId?.productPrice}</p>
                   </div>
                 </div>
-                <div className='flex gap-5 items-center'>
+                <div className='flex gap-3 lg:gap-5 items-center'>
                   <Button type='button' onClick={()=>handleUpdateQuantity(product.productId._id,'decrease')} variant='outline'>-</Button>
                   <span>{product.quantity}</span>
                   <Button type='button'onClick={()=>handleUpdateQuantity(product.productId._id,'increase')} variant='outline'>+</Button>
                 </div>
-                <p>
+                <p className='font-semibold'>
   ₹{Number(product.price || product?.productId?.productPrice || 0).toLocaleString('en-IN')}
 </p>
                 <p onClick={()=>handleRemove(product?.productId?._id)} className='flex text-red-500 items-center gap-1 cursor-pointer'><Trash2 className='w-4 h-4'/>
@@ -122,7 +122,7 @@ const loadCart = async()=>{
           })}
           </div>
         <div>
-          <Card className='w-[400px]'>
+          <Card className='w-full lg:w-[400px]'>
             <CardHeader>
               <CardTitle> Order Summary
               </CardTitle>
@@ -171,7 +171,7 @@ const loadCart = async()=>{
         
         :(
        
-       <div className='flex flex-col items-center justify-center min-h-[60vh] p-6 text-center'>
+       <div className='flex flex-col items-center justify-center min-h-[60vh] p-6 lg:p-6 text-center'>
           {/*icon */}
           
         <div className='bg-pink-100 p-6 rounded-full'>
