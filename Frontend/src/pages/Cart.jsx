@@ -9,10 +9,12 @@ import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { setCart } from '@/redux/productSlice'
 import toast from 'react-hot-toast'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Separator } from "@/components/ui/separator"
 
 const Cart = () => {
   const navigate = useNavigate()
-  const { cart= { items: [] } } = useSelector(store => store.product)
+  const { cart } = useSelector(store => store.product)
   console.log(cart)
   const dispatch = useDispatch()
 
@@ -256,3 +258,5 @@ const Cart = () => {
 
     </div>
 );
+}
+export default Cart;
