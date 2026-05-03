@@ -180,15 +180,14 @@ const Products = () => {
     </div> 
         {/*product grid */}
    <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 p-2 mt-2'>
-    
      {
     products.map((product)=>{
       return  <ProductCard key={product._id} product={product} loading={loading}/>
     })
     }
-    
-            </div> 
-          {products.length === 0 && (
+     </div> 
+         
+  {products.length === 0 && (
   <p className="text-center text-gray-500 mt-10">
     No products found
   </p>
