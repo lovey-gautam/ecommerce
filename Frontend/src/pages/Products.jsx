@@ -99,7 +99,7 @@ const Products = () => {
     console.log(allProducts)
   return (
     <div className='pt-20 pb-10'>
-      <div className='md:hidden flex gap-2 px-4 mt-2 mb-4 sticky top-16 bg-white z-30'>
+      <div className='md:hidden flex gap-2 px-4 py-2  mb-4 sticky top-16 bg-white z-30 shadow-sm'>
          <button
         onClick={() => setShowFilters(true)}
         className="bg-pink-600 text-white px-4 py-2 rounded-md"
@@ -144,7 +144,7 @@ const Products = () => {
       </div>
     )}
 
-        <div className='max-w-7xl mx-auto flex flex-col md:flex-row gap-7 px-4'>
+        <div className='max-w-7xl mx-auto flex flex-col md:flex-row gap-6 px-3 md:px-4'>
  <div className="hidden md:block">
         {/*sidebar*/}
         <FilterSidebar 
@@ -162,7 +162,7 @@ const Products = () => {
         />
  </div>
         {/*Main producr section   */}
-        <div className='flex flex-col flex-1'>
+        <div className='flex flex-col flex-1 px-1'>
             <div className='flex justify-end mb-4'>
                 <Select onValueChange={(value)=>setSortOrder(value)}>
                   <SelectTrigger className="w-[200px]">
@@ -179,7 +179,7 @@ const Products = () => {
     </Select>
     </div> 
         {/*product grid */}
-   <div className='grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4'>
+   <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 p-2 mt-2'>
     
      {
     products.map((product)=>{
@@ -188,6 +188,10 @@ const Products = () => {
     }
     
             </div> 
+          {products.length === 0 && (
+  <p className="text-center text-gray-500 mt-10">
+    No products found
+  </p>
         </div>
      </div>
  </div>
