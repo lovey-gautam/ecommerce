@@ -12,7 +12,7 @@ import toast from 'react-hot-toast'
 
 const Cart = () => {
   const navigate = useNavigate()
-  const { cart } = useSelector(store => store.product)
+  const { cart= { items: [] } } = useSelector(store => store.product)
   console.log(cart)
   const dispatch = useDispatch()
 
