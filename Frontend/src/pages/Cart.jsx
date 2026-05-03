@@ -9,12 +9,12 @@ import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { setCart } from '@/redux/productSlice'
 import toast from 'react-hot-toast'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import {  CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Separator } from "@/components/ui/separator"
 
 const Cart = () => {
   const navigate = useNavigate()
-  const { cart } = useSelector(store => store.product)
+  const { cart= { items: [] } } = useSelector(store => store.product)
   console.log(cart)
   const dispatch = useDispatch()
 
@@ -38,9 +38,9 @@ const Cart = () => {
           Authorization: `Bearer ${accessToken}`
         }
       })
-
+console.log("CART API RESPONSE:", res.data)
       if (res.data.success) {
-        dispatch(setCart(res.data.cart))
+        dispatch(setCart(res.data.cart || { items: [] }))
       }
     } catch (error) {
       console.log(error)
