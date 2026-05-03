@@ -101,10 +101,10 @@ console.log("CART API RESPONSE:", res.data)
           <div className='max-w-7xl mx-auto flex flex-col lg:flex-row gap-4 lg:gap-7'>
 
             {/* LEFT - CART ITEMS */}
-            <div className='flex flex-col gap-5 flex-1 order-1 lg:order-none'>
+            <div className='flex flex-col gap-3 max-h-[70vh] overflow-y-auto pr-2 flex-1 order-1 lg:order-none'>
               {cart?.items?.map((product, index) => (
-                <Card key={index}>
-                  <div className='flex items-center justify-between gap-3 py-2'>
+                <Card className="p-2" key={index}>
+                  <div className='flex items-center justify-between gap-2 py-1'>
 
                     <div className='flex items-center w-full lg:w-[350px]'>
                       <img
@@ -121,7 +121,7 @@ console.log("CART API RESPONSE:", res.data)
                       </div>
                     </div>
 
-                    <div className='flex gap-3 lg:gap-5 items-center'>
+                    <div className='flex items-center gap-2'>
                       <Button size= "sm" type='button'
                         onClick={() =>
                           handleUpdateQuantity(product.productId._id, 'decrease')
@@ -142,7 +142,7 @@ console.log("CART API RESPONSE:", res.data)
                       </Button>
                     </div>
 
-                    <p className='font-semibold'>
+                    <p className='font-semibold text-sm whitespace-nowrap'>
                       ₹
                       {Number(
                         product.price ||
@@ -153,7 +153,7 @@ console.log("CART API RESPONSE:", res.data)
 
                     <p
                       onClick={() => handleRemove(product?.productId?._id)}
-                      className='flex text-red-500 items-center gap-1 cursor-pointer'
+                      className='flex text-red-500 items-center gap-1 cursor-pointer text-sm'
                     >
                       <Trash2 className='w-4 h-4' />
                       Remove
