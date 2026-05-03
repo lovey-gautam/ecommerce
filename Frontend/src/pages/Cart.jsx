@@ -89,77 +89,56 @@ console.log("CART API RESPONSE:", res.data)
   }, [dispatch])
 
   return (
+
   <div className='pt-20 pb-24 bg-gray-50 min-h-screen'>
 
-  <div className='max-w-7xl mx-auto flex flex-col lg:flex-row gap-5'>
+    <div className='flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3'>
 
-    {/* LEFT - CART ITEMS */}
-    <div className='flex-1 flex flex-col gap-3 max-h-[70vh] overflow-y-auto pr-2'>
-      {cart?.items?.map((product, index) => (
-        <Card key={index} className="p-2">
-          <div className='flex items-center justify-between gap-2'>
+  {/* LEFT */}
+  <div className='flex items-center gap-3 flex-1'>
+    <img
+      src={product?.productId?.productImg?.[0]?.url || userLogo}
+      className='w-14 h-14 object-cover rounded'
+    />
 
-            {/* IMAGE + NAME */}
-            <div className='flex items-center gap-3 flex-1 min-w-0'>
-              <img
-                src={product?.productId?.productImg?.[0]?.url || userLogo}
-                className='w-12 h-12 object-cover rounded'
-              />
+    <div className='min-w-0'>
+      <h1 className='font-medium text-sm truncate max-w-[160px]'>
+        {product?.productId?.productName}
+      </h1>
+      <p className='text-xs text-gray-500'>
+        ₹{product?.productId?.productPrice}
+      </p>
+    </div>
+  </div>
 
-              <div className='min-w-0'>
-                <h1 className='font-medium text-sm truncate max-w-[120px]'>
-                  {product?.productId?.productName}
-                </h1>
-                <p className='text-xs text-gray-500'>
-                  ₹{product?.productId?.productPrice}
-                </p>
-              </div>
-            </div>
+  {/* QTY + PRICE + REMOVE (mobile stacked) */}
+  <div className='flex items-center justify-between sm:justify-end gap-3 w-full sm:w-auto'>
 
-            {/* QTY */}
-            <div className='flex items-center gap-2'>
-              <Button
-                size="sm"
-                variant="outline"
-                onClick={() =>
-                  handleUpdateQuantity(product.productId._id, 'decrease')
-                }
-              >
-                -
-              </Button>
+    {/* QTY */}
+    <div className='flex items-center gap-2'>
+      <Button size="sm" variant="outline"
+        onClick={() => handleUpdateQuantity(product.productId._id, 'decrease')}
+      >-</Button>
 
-              <span className="text-sm">{product.quantity}</span>
+      <span className="text-sm">{product.quantity}</span>
 
-              <Button
-                size="sm"
-                variant="outline"
-                onClick={() =>
-                  handleUpdateQuantity(product.productId._id, 'increase')
-                }
-              >
-                +
-              </Button>
-            </div>
-
-            {/* PRICE */}
-            <p className='font-semibold text-sm w-[70px] text-right'>
-              ₹{Number(
-                product.price ||
-                product?.productId?.productPrice ||
-                0
-              ).toLocaleString('en-IN')}
-            </p>
-
-            {/* REMOVE */}
-            <Trash2
-              onClick={() => handleRemove(product?.productId?._id)}
-              className='w-4 h-4 text-red-500 cursor-pointer'
-            />
-          </div>
-        </Card>
-      ))}
+      <Button size="sm" variant="outline"
+        onClick={() => handleUpdateQuantity(product.productId._id, 'increase')}
+      >+</Button>
     </div>
 
+    {/* PRICE */}
+    <p className='font-semibold text-sm w-[70px] text-right'>
+      ₹{Number(product.price || product?.productId?.productPrice || 0).toLocaleString('en-IN')}
+    </p>
+
+    {/* REMOVE */}
+    <Trash2
+      onClick={() => handleRemove(product?.productId?._id)}
+      className='w-5 h-5 text-red-500 cursor-pointer'
+    />
+  </div>
+</div>
     {/* RIGHT - ORDER SUMMARY */}
     <div className='w-full lg:w-[400px]'>
       <Card>
