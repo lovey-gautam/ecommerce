@@ -60,7 +60,7 @@ const ProductCard = ({product,loading}) => {
        
       <div className='flex flex-col justify-between flex-1 h-full'>
         <h1 className='text-sm font-medium line-clamp-2'>{productName}</h1>
-        <h2 className='text-pink-600 font-semibold text-sm'>₹{productPrice.toLocaleString('en-IN')}</h2> 
+        <h2 className='text-pink-600 font-semibold text-sm'>₹{productPrice.toLocaleString('en-IN') || 0}</h2> 
         <Button size="sm" disabled ={loadingBtn} onClick ={()=>addToCart(product._id)} className="bg-pink-600 hover:bg-blue-950 text-xs py-1 mt-1 w-fit">
           <ShoppingCart size={14}/>{loadingBtn? "Adding...":"Add"}</Button>
         </div>
