@@ -104,36 +104,34 @@ console.log("CART API RESPONSE:", res.data)
             <div className='flex flex-col gap-5 flex-1 order-1 lg:order-none'>
               {cart?.items?.map((product, index) => (
                 <Card key={index}>
-                  <div className='flex flex-col lg:flex-row lg:justify-between lg:items-center gap-4 pr-4 lg:pr-7'>
+                  <div className='flex items-center justify-between gap-3 py-2'>
 
                     <div className='flex items-center w-full lg:w-[350px]'>
                       <img
                         src={product?.productId?.productImg?.[0]?.url || userLogo}
-                        className='w-25 h-25'
+                        className='w-16 h-16 object-cover'
                       />
 
-                      <div className='w-[280px]'>
-                        <h1 className='font-semibold truncate'>
+                      <div className='flex flex-col'>
+                        <h1 className='font-semibold text-sm truncate max-w-[140px]'>
                           {product?.productId?.productName}
                         </h1>
-                        <p>₹{product?.productId?.productPrice}</p>
+                        <p className='text-xs text-gray-600'>
+                          ₹{product?.productId?.productPrice}</p>
                       </div>
                     </div>
 
                     <div className='flex gap-3 lg:gap-5 items-center'>
-                      <Button
-                        type='button'
+                      <Button size= "sm" type='button'
                         onClick={() =>
                           handleUpdateQuantity(product.productId._id, 'decrease')
                         }
-                        variant='outline'
-                      >
-                        -
+                        variant='outline' > -
                       </Button>
 
-                      <span>{product.quantity}</span>
+                      <span className="text-sm">{product.quantity}</span>
 
-                      <Button
+                      <Button size ="sm"
                         type='button'
                         onClick={() =>
                           handleUpdateQuantity(product.productId._id, 'increase')
