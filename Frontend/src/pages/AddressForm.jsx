@@ -135,8 +135,8 @@ const handlePayment = async()=>{
   return (
     <div className='max-w-7xl mx-auto grid place-items-center p-10'>
         <h1 className='text-2xl p-10 font-bold text-left pl-5 mb-4'> Select the Address</h1>
-        <div className='grid grid-cols-2 items-start gap-20 mt-10 max-w-7xl mx-auto'>
-            <div className='space-y-4 p-6 bg-white'>
+        <div className='grid grid-cols-1 lg:grid-cols-2 items-start gap-8 lg:gap-20 mt-10 max-w-7xl mx-auto px-4'>
+            <div className='space-y-4 p-4 sm:p-6 bg-white w-full'>
                 {
                     showForm ?(
                         <>
@@ -266,7 +266,7 @@ const handlePayment = async()=>{
             </div>
             {/*right side order summary*/}
             <div>
-                <Card className="w-[400px]">
+                <Card className="w-full max-w-md mx-auto lg:mx-0">
                     <CardHeader>
                         <CardTitle>Order Summary</CardTitle>
                         </CardHeader>
