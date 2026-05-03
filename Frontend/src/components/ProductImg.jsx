@@ -20,10 +20,10 @@ const ProductImg = ({images=[]}) => {
     <div className='flex flex-col md:flex-row gap-4 w-full'>
       <div className='flex md:flex-col flex-row gap-2 
                       overflow-x-auto md:overflow-y-auto 
-                      max-h-[400px]'>{
+                      max-h-[400px]'> {
         
-        images.map((img,idx)=>{
-         return <img onClick={()=>setMainImg(img.url)}
+        images.map((img,idx)=>(
+         <img onClick={()=>setMainImg(img.url)}
            key={idx}
            src={img.url} alt=""
           
