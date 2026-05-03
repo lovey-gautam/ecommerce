@@ -76,17 +76,17 @@ const Cart = () => {
   }, [])
 
   return (
-    <div className="pt-20 pb-24 bg-gray-50 min-h-screen">
+    <div className="pt-20 pb-24 bg-gray-50 min-h-screen px-3 sm:px-6">
 
-      <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-5">
+      <div className="max-w-6xl mx-auto flex flex-col lg:flex-row gap-5">
 
         {/* LEFT CART */}
-        <div className="flex-1 flex flex-col gap-3 max-h-[65vh] overflow-y-auto pr-2">
+        <div className="flex-1 flex flex-col gap-3 px-1 sm:px-0">
 
           {cart?.items?.map((product, index) => (
-            <Card key={index} className="p-3">
+            <Card key={index} className="p-3 mx-1 sm:mx-0">
 
-              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+              <div className="flex flex-col   sm:flex-row sm:items-center sm:justify-between gap-3">
 
                 {/* LEFT */}
                 <div className="flex items-center gap-3 flex-1 min-w-0">
