@@ -90,13 +90,13 @@ const loadCart = async()=>{
   },[dispatch])
 
   return (
-    <div className='pt-20 bg-gray-50 min-h-screen'>
+    <div className='pt-20 pb-20 bg-gray-50 min-h-screen'>
       {
         cart?.items?.length >0 ? (
         <div className='max-w-7xl mx-auto'>
         <h1 className='text-2xl font-bold text-gray-800 mb-7'>Shopping Cart</h1>
         <div className='max-w-7xl mx-auto flex flex-col lg:flex-row gap-4 lg:gap-7'>
-        <div className='flex flex-col gap-5 flex-1'>
+          <div className='flex flex-col gap-5 flex-1 order-1 lg:order-none'>
           {cart?.items?.map((product,index)=>{
             return <Card key={index} >
               <div className='flex flex-col lg:flex-row lg:justify-between lg:items-center gap-4 pr-4 lg:pr-7'>
@@ -152,7 +152,10 @@ const loadCart = async()=>{
                        <Input placeholder ="Promo Code"/>
                        <Button variant ='outline'>Apply</Button> 
                 </div>
+                <div className='fixed bottom-0 left-0 right-0 p-3 bg-white border-t lg:hidden'>
+
                 <Button onClick={()=>navigate('/address')} className='w-full bg-pink-600'>PLACE ORDER</Button>
+                </div>
                 <Button variant='outline' className='w-full bg-transparent'>
                   <Link to="/products">Continue Shopping</Link>
                 </Button>
