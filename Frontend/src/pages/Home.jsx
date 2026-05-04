@@ -10,8 +10,8 @@ const Home = () => {
   const navigate = useNavigate()
 
     const handleSearch = (e) => {
-    if (e.key === "Enter") {
-      navigate(`/products?search=${search}`)
+   if (e.key === "Enter" && search.trim() !== "") {
+    navigate(`/products?search=${encodeURIComponent(search)}`)
     }
   }
   useEffect(() => {
