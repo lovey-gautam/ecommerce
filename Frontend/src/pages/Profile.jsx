@@ -108,8 +108,8 @@ setUpdateUser({...updateUser,profilePic:URL.createObjectURL(selectedFile)})
           <div>
             <div className="flex flex-col justify-center items-center bg-gray-100">
               <h1 className="font-bold mb-7 text-2xl text-gray-800">Update Profile</h1>
-              <div className="w-full flex gap-10 justify-between items-start px-7 max-w-2xl">
-                <div className="flex flex-col items-center">
+              <div className="w-full flex flex-col md:flex-row gap-6 md:gap-10 items-center md:items-start px-4 md:px-7 max-w-2xl">
+                <div className="flex flex-col items-center md:items-start">
                   <img src={updateUser?.profilePic || userLogo}
                    alt="profile" 
                    className="w-36 h-34 rounded-full object-cover object-top border-4 border-pink-800"/>
