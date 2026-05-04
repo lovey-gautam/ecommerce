@@ -58,9 +58,9 @@ const navigate = useNavigate()
 
   const handleRemove = async (productId) => {
     try {
-      const res = await axios.delete(`${API}/remove`, {
+      const res = await axios.delete(`${API}/remove/${productId}`, {
         headers: { Authorization: `Bearer ${accessToken}` },
-        data: { productId }
+      
       })
 
       if (res.data.success) {
