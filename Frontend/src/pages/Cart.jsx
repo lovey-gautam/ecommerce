@@ -20,6 +20,9 @@ const navigate = useNavigate()
     return acc + price * quantity
   }, 0)
 
+  const getProductId = (item) => {
+  return item?.productId?._id || item?._id
+}
   const shipping = subtotal === 0 ? 0 : (subtotal > 299 ? 0 : 10)
   const tax = Math.round(subtotal * 0.05)
   const total = subtotal + shipping + tax
