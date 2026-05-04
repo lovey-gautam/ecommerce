@@ -45,17 +45,6 @@ const Home = () => {
 
       {/* HERO */}
       <Hero />
-
-      {/* 🔥 SHOP NOW BUTTON */}
-      <div className="flex justify-center mt-6 relative z-20"">
-        <button
-          onClick={() => navigate('/products')}
-          className="bg-pink-600 text-white px-6 py-3 rounded-lg hover:bg-pink-700 pointer-events-auto"
-        >
-          Shop Now
-        </button>
-      </div>
-
       <Features />
     </div>
   )
