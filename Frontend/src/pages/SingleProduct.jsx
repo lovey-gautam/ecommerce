@@ -14,7 +14,38 @@ const SingleProduct = () => {
     if (!products || products.length === 0) {
   return <p>Loading products...</p>;
 }
+ const [product, setProduct] = useState(null)
 
+  useEffect(() => {
+    // Try from Redux first
+    const existingProduct = products.find(
+      item => String(item._id) === String(productId)
+    )
+
+    if (existingProduct) {
+      setProduct(existingProduct)
+      return
+    }
+
+    // Fetch if not found
+    const fetchProduct = async () => {
+      try {
+        const res = await axios.get(
+          `${import.meta.env.VITE_URL}/products/${productId}`
+        )
+
+        if (res.data.success) {
+          setProduct(res.data.product)
+        }
+      } catch (err) {
+        console.log(err)
+      }
+    }
+
+    fetchProduct()
+  }, [productId, products])
+
+  if (!product) return <p>Loading product...</p>
 if (!product) {
   return <p>Product not found</p>;
 }
