@@ -202,7 +202,7 @@ const navigate = useNavigate()
       </div>
   
     <div className='fixed bottom-0 left-0 right-0 p-3 bg-white border-t  z-50'> 
-    <Button onClick={() => navigate('/address')} className='w-full bg-pink-600 mt-4 hidden lg:block' >
+    <Button onClick={() => navigate('/address')} className='w-full bg-pink-600 mt-4  lg:block' >
       PLACE ORDER 
     </Button> </div> 
     </div>
