@@ -25,7 +25,7 @@ if (!product) {
         <div  className="w-full md:w-1/2" >
         <ProductImg images={product.productImg} product={product}/>
       </div>
-        <div  className="w-full md:w-1/2">
+        <div  className="w-full pt-4 md:w-1/2">
         <ProductDesc  product={product}/>
         </div>
       </div>
