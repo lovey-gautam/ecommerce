@@ -3,6 +3,7 @@ import { Button } from './ui/button'
 import { useNavigate } from 'react-router-dom'
 
 const Hero = () => {
+  const navigate = useNavigate()
   return (
     <section className='bg-gradient-to-r mx-auto from-blue-600 to-purple-600 text-white py-10 md:py-16'>
         <div className='max-w-7xl mx-auto px-4'>
