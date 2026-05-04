@@ -170,7 +170,7 @@ const navigate = useNavigate()
         </div>
 
         {/* RIGHT SUMMARY */}
-        <div className="w-full lg:w-[400px]">
+        <div className="w-full px-2 lg:w-[400px]">
 
           <Card>
             <CardHeader>
