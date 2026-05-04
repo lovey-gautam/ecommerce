@@ -19,19 +19,33 @@ if (!product) {
   return <p>Product not found</p>;
 }
   return (
-    <div className='pt-20 py-10 max-w-7xl mx-auto px-4'>
-      <Breadcrums product={product}/>
-      <div className='mt-6 flex flex-col md:flex-row gap-3 md:gap-8 items-start'>
-        <div  className="w-full md:w-1/2" >
-        <ProductImg images={product.productImg} product={product}/>
-      </div>
-        <div  className="w-full md:w-1/2">
-        <ProductDesc  product={product}/>
-        </div>
-      </div>
-      <Footer/>
-    </div>
-  )
-}
+  <div className="pt-20 flex flex-col min-h-screen">
 
+    {/* MAIN CONTENT */}
+    <div className="flex-1 max-w-7xl mx-auto px-4 py-6">
+
+      <Breadcrums product={product} />
+
+      <div className="mt-6 flex flex-col md:flex-row gap-3 md:gap-8 items-start">
+
+        {/* IMAGE */}
+        <div className="w-full md:w-1/2">
+          <ProductImg images={product.productImg} product={product} />
+        </div>
+
+        {/* DESCRIPTION */}
+        <div className="w-full md:w-1/2">
+          <ProductDesc product={product} />
+        </div>
+
+      </div>
+
+    </div>
+
+    {/* FOOTER */}
+    <Footer />
+
+  </div>
+)
+}
 export default SingleProduct
