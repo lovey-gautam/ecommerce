@@ -93,7 +93,7 @@ const navigate = useNavigate()
                 <div className="flex items-center gap-3 flex-1 min-w-0">
 
                   <img
-                      onClick={() => navigate(`/products/${product?._id}`)}
+                      onClick={() => navigate(`/products/${product?.productId?._id}`)}
 
                     src={product?.productId?.productImg?.[0]?.url || userLogo}
                     className="w-14 h-14 object-cover rounded"
