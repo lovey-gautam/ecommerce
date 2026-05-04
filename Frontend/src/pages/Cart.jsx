@@ -68,7 +68,7 @@ const navigate = useNavigate()
 
       if (res.data.success) {
         dispatch(setCart(res.data.cart))
-        toast.success("Product removed")
+        toast.success("Product removed successfully")
       }
     } catch (error) {
       console.log(error)
