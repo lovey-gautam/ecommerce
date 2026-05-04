@@ -1,6 +1,7 @@
 import FilterSidebar from '@/components/FilterSidebar'
 import React, { useEffect, useState } from 'react'
 import { useLocation } from "react-router-dom"
+import Features from '@/components/Features'
 
 import axios from 'axios'
 import {
@@ -203,6 +204,7 @@ const Products = () => {
       )}
         </div>
      </div>
+      <Features/>
  </div>
   )
 }
