@@ -2,6 +2,7 @@ import FilterSidebar from '@/components/FilterSidebar'
 import React, { useEffect, useState } from 'react'
 import { useLocation } from "react-router-dom"
 import Features from '@/components/Features'
+import Footer from '@/components/Footer'
 
 import axios from 'axios'
 import {
@@ -108,7 +109,7 @@ const Products = () => {
   setSearch(searchQuery)
 }, [location.search])
   return (
-    <div className='pt-20 pb-10'>
+    <div className='pt-20 pb-16 min-h-screen bg-gray-50'>
       <div className='md:hidden flex gap-2 px-4 py-2  mb-4 sticky top-16 bg-white z-30 shadow-sm'>
          <button
         onClick={() => setShowFilters(true)}
@@ -204,7 +205,12 @@ const Products = () => {
       )}
         </div>
      </div>
+      <div className ="mt-16 px-4">
       <Features/>
+      </div>
+      
+      <Footer/>
+      
  </div>
   )
 }
