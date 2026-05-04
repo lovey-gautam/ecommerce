@@ -13,9 +13,9 @@ const SingleProduct = () => {
   const [product, setProduct] = useState(null)
 
   useEffect(() => {
-    // 1. Try Redux first
+    // 1. Try to get product from Redux
     const existingProduct = products.find(
-      (item) => String(item._id) === String(productId)
+      item => String(item._id) === String(productId)
     )
 
     if (existingProduct) {
@@ -23,7 +23,7 @@ const SingleProduct = () => {
       return
     }
 
-    // 2. Fetch if not found (THIS FIXES YOUR ISSUE)
+    // 2. If not found, fetch from backend
     const fetchProduct = async () => {
       try {
         const res = await axios.get(
@@ -41,7 +41,8 @@ const SingleProduct = () => {
     fetchProduct()
   }, [productId, products])
 
-  if (!product) return <p>Loading product...</p>
+  // Loading state
+  if (!product) return <p className="pt-20 text-center">Loading product...</p>
 
   return (
     <div className='pt-20 py-10 max-w-7xl mx-auto px-4'>
