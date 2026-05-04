@@ -91,14 +91,14 @@ const navigate = useNavigate()
 
                 {/* LEFT */}
                 <div
-                  className="w-20 h-20 sm:w-14 sm:h-14 cursor-pointer"
-
-                  onClick={() =>{
-                    const productId = product?.productId?._id || product?._id
-                navigate(`/products/${productId}`)
-                  }}
-                >
+                  className="flex items-center gap-3 flex-1 min-w-0 cursor-pointer">
                 <img
+                  
+                   
+                  onClick={() => navigate(`/products/${product?.productId?._id}`,{
+                      state: { product: product.productId }
+                  })
+                 }
                     src={product?.productId?.productImg?.[0]?.url || userLogo}
                     className="w-14 h-14 object-cover rounded"
                   />
