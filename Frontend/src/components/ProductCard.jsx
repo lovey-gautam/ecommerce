@@ -44,28 +44,54 @@ const ProductCard = ({product,loading}) => {
     }
    console.log("Product images:", productImg);
   return (
-    <div className='flex gap-3 p-3 border rounded-lg shadow-sm h-full bg-white'>
-      <div className='w-24 h-24 flex-shrink-0 overflow-hidden rounded-md'>
-        {
-          loading? (<Skeleton className="w-full h-full"/>
-                    ):(
-          <img onClick={()=>navigate(`/products/${product._id}`)}
-          src={productImg[0]?.url || '/placeholder.png' } alt="" 
-            onError={(e) => { e.currentTarget.src = '/placeholder.png'; }}
+  <div className="bg-white rounded-lg shadow-sm p-3 flex flex-col h-full hover:shadow-md transition">
 
-          className='w-full h-full overflow-hidden rounded-md object-cover '/>
-)
-        }
-       </div>
-       
-      <div className='flex flex-col justify-between flex-1 h-full'>
-        <h1 className='text-sm font-medium line-clamp-2'>{productName}</h1>
-        <h2 className='text-pink-600 font-semibold text-sm'>₹{productPrice.toLocaleString('en-IN')}</h2> 
-        <Button size="sm" disabled ={loadingBtn} onClick ={()=>addToCart(product._id)} className="bg-pink-600 hover:bg-blue-950 text-xs py-1 mt-1 w-fit">
-          <ShoppingCart size={14}/>{loadingBtn? "Adding...":"Add"}</Button>
-        </div>
+    {/* IMAGE */}
+    <div
+      className="w-full h-40 overflow-hidden rounded-md cursor-pointer"
+      onClick={() =>
+        navigate(`/products/${product._id}`, {
+          state: { product }
+        })
+      }
+    >
+      {loading ? (
+        <Skeleton className="w-full h-full" />
+      ) : (
+        <img
+          src={productImg[0]?.url || '/placeholder.png'}
+          alt={productName}
+          onError={(e) => (e.currentTarget.src = '/placeholder.png')}
+          className="w-full h-full object-cover"
+        />
+      )}
     </div>
-  )
+
+    {/* CONTENT */}
+    <div className="mt-2 flex flex-col flex-1">
+
+      <h1 className="text-sm font-medium line-clamp-2">
+        {productName}
+      </h1>
+
+      <p className="text-pink-600 font-semibold text-sm mt-1">
+        ₹{productPrice.toLocaleString('en-IN')}
+      </p>
+
+      <Button
+        size="sm"
+        disabled={loadingBtn}
+        onClick={() => addToCart(product._id)}
+        className="bg-pink-600 hover:bg-pink-700 text-xs mt-auto"
+      >
+        <ShoppingCart size={14} className="mr-1" />
+        {loadingBtn ? "Adding..." : "Add"}
+      </Button>
+
+    </div>
+  </div>
+)
+    
 }
 
 export default ProductCard
