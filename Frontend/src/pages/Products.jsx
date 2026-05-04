@@ -1,5 +1,6 @@
 import FilterSidebar from '@/components/FilterSidebar'
 import React, { useEffect, useState } from 'react'
+import { useLocation } from "react-router-dom"
 
 import axios from 'axios'
 import {
@@ -38,6 +39,8 @@ const Products = () => {
     const dispatch = useDispatch()
     const [sortOrder,setSortOrder ] = useState('');
     const [showFilters, setShowFilters] = useState(false); 
+  const location = useLocation()
+  
     const getAllProducts = async()=>{
         try{
           setLoading(true)
@@ -97,6 +100,12 @@ const Products = () => {
         getAllProducts()
     },[])
     console.log(allProducts)
+  
+  useEffect(() => {
+  const params = new URLSearchParams(location.search)
+  const searchQuery = params.get("search") || ""
+  setSearch(searchQuery)
+}, [location.search])
   return (
     <div className='pt-20 pb-10'>
       <div className='md:hidden flex gap-2 px-4 py-2  mb-4 sticky top-16 bg-white z-30 shadow-sm'>
