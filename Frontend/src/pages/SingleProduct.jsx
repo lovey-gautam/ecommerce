@@ -4,7 +4,7 @@ import ProductImg from '@/components/ProductImg'
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
-
+import Footer from '@/components/Footer'
 const SingleProduct = () => {
   const {id: productId } = useParams();
     const params = useParams()
@@ -29,6 +29,7 @@ if (!product) {
         <ProductDesc  product={product}/>
         </div>
       </div>
+      <Footer/>
     </div>
   )
 }
