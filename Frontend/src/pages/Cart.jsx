@@ -90,11 +90,15 @@ const navigate = useNavigate()
               <div className="flex flex-col   sm:flex-row sm:items-center sm:justify-between gap-3">
 
                 {/* LEFT */}
-                <div className="flex items-center gap-3 flex-1 min-w-0">
+                <div
+                  className="w-20 h-20 sm:w-14 sm:h-14 cursor-pointer"
 
-                  <img
-                      onClick={() => navigate(`/products/${product?.productId?._id}`)}
-
+                  onClick={() =>{
+                    const productId = product?.productId?._id || product?._id
+                navigate(`/products/${productId}`)
+                  }}
+                >
+                <img
                     src={product?.productId?.productImg?.[0]?.url || userLogo}
                     className="w-14 h-14 object-cover rounded"
                   />
