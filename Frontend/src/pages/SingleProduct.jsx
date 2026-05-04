@@ -34,4 +34,3 @@ if (!product) {
 }
 
 export default SingleProduct
-  it works ok let me tell u when i am on product page and go to this page everything shows single products shown but when i go to cart and click product th page is pen but product not shown 
