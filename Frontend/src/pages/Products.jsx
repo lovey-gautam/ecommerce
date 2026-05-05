@@ -42,7 +42,14 @@ const Products = () => {
     const [sortOrder,setSortOrder ] = useState('');
     const [showFilters, setShowFilters] = useState(false); 
   const location = useLocation()
-  
+
+  if (loading) {
+  return (
+    <div className="flex justify-center items-center h-screen">
+      Loading...
+    </div>
+  )
+}
     const getAllProducts = async()=>{
         try{
           setLoading(true)
@@ -63,7 +70,7 @@ const Products = () => {
     }
 
     useEffect(()=>{
-      if(allProducts.length==0) return;
+      if(allProducts.length === 0) return;
 
       let filtered = [...allProducts]
 
