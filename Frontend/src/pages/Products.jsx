@@ -41,15 +41,18 @@ const Products = () => {
     const dispatch = useDispatch()
     const [sortOrder,setSortOrder ] = useState('');
     const [showFilters, setShowFilters] = useState(false); 
-  const location = useLocation()
+    const location = useLocation();
 
-  if (loading) {
-  return (
-    <div className="flex justify-center items-center h-screen">
-      Loading...
-    </div>
-  )
-}
+  
+    if (loading) {
+       return (
+           <div className="flex justify-center items-center h-screen">
+          Loading...
+            </div>
+         )
+        }
+
+  
     const getAllProducts = async()=>{
         try{
           setLoading(true)
