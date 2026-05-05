@@ -5,7 +5,7 @@ import Navbar from '@/components/Navbar';
 
 const Dashboard = () => {
   return (
-    <div className="flex min-h-screen">
+    <div className="flex min-h-screen w-full overflow-hidden">
 
       {/* Sidebar - hidden on mobile */}
       <div className="hidden md:block">
@@ -13,13 +13,13 @@ const Dashboard = () => {
       </div>
 
       {/* Main content */}
-      <div className="flex-1 flex flex-col w-full">
+      <div className="flex-1 flex flex-col w-full  min-w-0">
 
         {/* Optional Navbar */}
         <Navbar />
 
         {/* Page content */}
-        <div className="p-3 md:p-6 w-full">
+        <div className="p-3 md:p-6 w-full  overflow-y-auto">
           <Outlet />
         </div>
 
