@@ -34,7 +34,7 @@ const navigate = useNavigate()
         getUserOrders()
      } ,[])
   return (
- <div className=" w-full px-2 sm:px-6 md:px-10  max-w-5xl mx-auto space-y-4">
+ <div className=" w-full px-3 sm:px-4 md:px-6  max-w-3xl mx-auto space-y-3">
     <OrderCart userOrder={userOrder} />
   </div>
   )
