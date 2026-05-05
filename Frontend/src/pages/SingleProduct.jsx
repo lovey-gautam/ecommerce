@@ -22,7 +22,7 @@ if (!product) {
   <div className="pt-20 flex flex-col min-h-screen">
 
     {/* MAIN CONTENT */}
-    <div className="flex-1 max-w-7xl mx-auto px-4 py-6">
+    <div className="flex-1 max-w-7xl mx-auto px-4 py-6 pb-24">
 
       <Breadcrums product={product} />
 
@@ -43,8 +43,9 @@ if (!product) {
     </div>
 
     {/* FOOTER */}
+    <div className = "mt-auto">
     <Footer />
-
+    </div>
   </div>
 )
 }
