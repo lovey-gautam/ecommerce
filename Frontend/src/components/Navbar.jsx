@@ -41,7 +41,7 @@ const navigate = useNavigate();
     <header className='bg-pink-50 fixed w-full top-0 border-b border-pink-200'>
      <div className='max-w-7xl mx-auto flex justify-between items-center py-3 px-4' >
       <div className='flex items-center gap-2'>
-        <span className='text-xl  font-bold text-pink-700'>Kart</span>
+        <span className='text-xl  font-bold text-pink-700'>BrijKart</span>
        <img src="/ekart.jpg" alt="Kart" className='w-16 md:w-24'/>
         
       </div>
