@@ -26,7 +26,7 @@ if (!product) {
 
       <Breadcrums product={product} />
 
-      <div className="mt-6 flex flex-col md:flex-row gap-3 md:gap-8 items-start">
+      <div className="mt-6 flex flex-col md:flex-row gap-1 md:gap-8 items-start">
 
         {/* IMAGE */}
         <div className="w-full md:w-1/2">
