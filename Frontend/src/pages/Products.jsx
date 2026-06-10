@@ -33,7 +33,7 @@ const items = [
 const Products = () => {
     const {products} = useSelector(store=> store.product)
     const [allProducts,setAllProducts] = useState([])
-    const [loading,setLoading] = useState(false)
+    const [loading,setLoading] = useState(true)
     const [search,setSearch] = useState("")
     const [category,setCategory] = useState("All")
     const [brand,setBrand] = useState("All")
@@ -190,19 +190,26 @@ const Products = () => {
     </Select>
     </div> 
         {/*product grid */}
-   <div className='grid grid-cols-2  md:grid-cols-4  gap-3 p-2 mt-2'>
-     {
-    products.map((product)=>{
-      return  <ProductCard key={product._id} product={product} loading={loading}/>
-    })
-    }
-     </div> 
-         
-  {products.length === 0 && (
-  <p className="text-center text-gray-500 mt-10">
-    No products found
-  </p>
-      )}
+  {
+  loading ? (
+    <div className="flex justify-center items-center h-64">
+      <div className="w-10 h-10 border-4 border-pink-500 border-t-transparent rounded-full animate-spin"></div>
+    </div>
+  ) : products.length > 0 ? (
+    <div className="grid grid-cols-2 md:grid-cols-4 gap-3 p-2 mt-2">
+      {products.map((product) => (
+        <ProductCard
+          key={product._id}
+          product={product}
+        />
+      ))}
+    </div>
+  ) : (
+    <p className="text-center text-gray-500 mt-10">
+      No products found
+    </p>
+  )
+}
         </div>
      </div>
       <div className ="mt-16 px-4">
