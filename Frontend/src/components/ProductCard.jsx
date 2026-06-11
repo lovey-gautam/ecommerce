@@ -21,6 +21,37 @@ const ProductCard = ({ product, loading }) => {
     setLoadingBtn(true)
 
     try {
+      const addToCart = async (productId) => {
+  if (loadingBtn) return;
+  setLoadingBtn(true);
+
+  try {
+    console.log("Token:", accessToken);
+
+    const res = await axios.post(
+      `${import.meta.env.VITE_URL}/cart/add`,
+      { productId },
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    if (res.data.success) {
+      toast.success("Product added to Cart");
+      dispatch(setCart(res.data.cart));
+    }
+  } catch (error) {
+    console.log(error.response?.data);
+    toast.error(
+      error.response?.data?.message || "Unable to add product"
+    );
+  } finally {
+    setLoadingBtn(false);
+  }
+};
       const res = await axios.post(
         `${import.meta.env.VITE_URL}/cart/add`,
         { productId },
